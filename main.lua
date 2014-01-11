@@ -11,28 +11,34 @@ function love.load()
 	WIDTH, HEIGHT = love.window.getDimensions()
 	HSPACING = 380 -- horizontal spacing between 2 categories
 	VSPACING = 150 -- vertical spacing between 2 items
-	ACTIVE_ZOOM = 1
-	PASSIVE_ZOOM = 0.75
+	C_ACTIVE_ZOOM = 1
+	C_PASSIVE_ZOOM = 0.75
+	I_ACTIVE_ZOOM = 0.666666666
+	I_PASSIVE_ZOOM = 0.5
 
 	categories = {
 		{
 			name = "Settings",
 			icon = love.graphics.newImage("settings.png"),
 			a = 255,
-			z = ACTIVE_ZOOM,
+			z = C_ACTIVE_ZOOM,
 			active_item = 1,
 			items = {
-				{ name = "Theme", icon = love.graphics.newImage("setting.png"), a = 255, z = ACTIVE_ZOOM, y = VSPACING },
+				{ name = "Theme",   icon = love.graphics.newImage("setting.png"), a = 255, z = I_ACTIVE_ZOOM,  y = VSPACING*1, r = 0, v = 0 },
+				{ name = "Network", icon = love.graphics.newImage("setting.png"), a = 128, z = I_PASSIVE_ZOOM, y = VSPACING*2, r = 0, v = 0 },
+
 			},
 		},
 		{
 			name = "Nintendo Entertainment System",
 			icon = love.graphics.newImage("nes.png"),
 			a = 128,
-			z = PASSIVE_ZOOM,
+			z = C_PASSIVE_ZOOM,
 			active_item = 1,
 			items = {
-				{ name = "Mario Bros.", icon = love.graphics.newImage("item.png"), a = 0, z = ACTIVE_ZOOM, y = VSPACING },
+				{ name = "Mario Bros.", icon = love.graphics.newImage("nes-cartidge.png"), a = 0, z = I_ACTIVE_ZOOM,  y = VSPACING*1, r = 0, v = 0 },
+				{ name = "Mario Bros.", icon = love.graphics.newImage("nes-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*2, r = 0, v = 0 },
+				{ name = "Mario Bros.", icon = love.graphics.newImage("nes-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*3, r = 0, v = 0 },
 			},
 		},
 		{
@@ -40,14 +46,14 @@ function love.load()
 			icon = love.graphics.newImage("snes.png"),
 			lib = '/usr/lib/libretro/libretro-snes9x-next.so',
 			a = 128,
-			z = PASSIVE_ZOOM,
+			z = C_PASSIVE_ZOOM,
 			active_item = 1,
 			items = {
-				{ name = "Super Bomberman",     icon = love.graphics.newImage("item.png"), a = 0, z = ACTIVE_ZOOM,  y = VSPACING*1, bg = love.graphics.newImage("bg_bomberman.png") },
-				{ name = "Secret of Mana",      icon = love.graphics.newImage("item.png"), a = 0, z = PASSIVE_ZOOM, y = VSPACING*2, bg = love.graphics.newImage("bg_som.png") },
-				{ name = "Super Metroid",       icon = love.graphics.newImage("item.png"), a = 0, z = PASSIVE_ZOOM, y = VSPACING*3, bg = love.graphics.newImage("bg_metroid.png"), rom = '/home/kivutar/Jeux/roms/metroid.smc' },
-				{ name = "The Legend of Zelda", icon = love.graphics.newImage("item.png"), a = 0, z = PASSIVE_ZOOM, y = VSPACING*4, bg = love.graphics.newImage("bg_zelda.png"), rom = '/home/kivutar/Jeux/roms/zelda.smc' },
-				{ name = "Tactics Ogre",        icon = love.graphics.newImage("item.png"), a = 0, z = PASSIVE_ZOOM, y = VSPACING*5, bg = love.graphics.newImage("bg_to.png") },
+				{ name = "Super Bomberman",     icon = love.graphics.newImage("snes-cartidge.png"), a = 0, z = I_ACTIVE_ZOOM,  y = VSPACING*1, r = 0, v = 0, bg = love.graphics.newImage("bg_bomberman.png") },
+				{ name = "Secret of Mana",      icon = love.graphics.newImage("snes-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*2, r = 0, v = 0, bg = love.graphics.newImage("bg_som.png") },
+				{ name = "Super Metroid",       icon = love.graphics.newImage("snes-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*3, r = 0, v = 0, bg = love.graphics.newImage("bg_metroid.png"), rom = '/home/kivutar/Jeux/roms/metroid.smc' },
+				{ name = "The Legend of Zelda", icon = love.graphics.newImage("snes-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*4, r = 0, v = 0, bg = love.graphics.newImage("bg_zelda.png"), rom = '/home/kivutar/Jeux/roms/zelda.smc' },
+				{ name = "Tactics Ogre",        icon = love.graphics.newImage("snes-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*5, r = 0, v = 0, bg = love.graphics.newImage("bg_to.png") },
 			},
 		},
 		{
@@ -55,41 +61,41 @@ function love.load()
 			icon = love.graphics.newImage("megadrive.png"),
 			lib = '/usr/lib/libretro/libretro-genplus.so',
 			a = 128,
-			z = PASSIVE_ZOOM,
+			z = C_PASSIVE_ZOOM,
 			active_item = 1,
 			items = {
-				{ name = "Sonic 2", icon = love.graphics.newImage("item.png"), a = 0, z = ACTIVE_ZOOM, y = VSPACING*1 },
-				{ name = "Sonic 3", icon = love.graphics.newImage("item.png"), a = 0, z = PASSIVE_ZOOM, y = VSPACING*2, rom = "/home/kivutar/Jeux/roms/sonic3.smd" },
+				{ name = "Sonic 2", icon = love.graphics.newImage("item.png"), a = 0, z = I_ACTIVE_ZOOM,  y = VSPACING*1, r = 0, v = 0 },
+				{ name = "Sonic 3", icon = love.graphics.newImage("item.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*2, r = 0, v = 0, rom = "/home/kivutar/Jeux/roms/sonic3.smd" },
 			},
 		},
 		{
 			name = "Playstation",
 			icon = love.graphics.newImage("ps1.png"),
 			a = 128,
-			z = PASSIVE_ZOOM,
+			z = C_PASSIVE_ZOOM,
 			active_item = 1,
 			items = {
-				{ name = "Crash Bandicoot",   icon = love.graphics.newImage("item.png"), a = 0, z = ACTIVE_ZOOM, y = VSPACING*1 },
-				{ name = "Final Fantasy VII", icon = love.graphics.newImage("item.png"), a = 0, z = PASSIVE_ZOOM, y = VSPACING*2 },
-				{ name = "Xenogears",         icon = love.graphics.newImage("item.png"), a = 0, z = PASSIVE_ZOOM, y = VSPACING*3 },
-				{ name = "Suikoden 2",        icon = love.graphics.newImage("item.png"), a = 0, z = PASSIVE_ZOOM, y = VSPACING*4 },
-				{ name = "Suikoden 2",        icon = love.graphics.newImage("item.png"), a = 0, z = PASSIVE_ZOOM, y = VSPACING*5 },
+				{ name = "Crash Bandicoot",   icon = love.graphics.newImage("ps1-cd.png"), a = 0, z = I_ACTIVE_ZOOM,  y = VSPACING*1, r = 0, v = 0 },
+				{ name = "Final Fantasy VII", icon = love.graphics.newImage("ps1-cd.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*2, r = 0, v = 0 },
+				{ name = "Xenogears",         icon = love.graphics.newImage("ps1-cd.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*3, r = 0, v = 0 },
+				{ name = "Suikoden 2",        icon = love.graphics.newImage("ps1-cd.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*4, r = 0, v = 0 },
+				{ name = "Suikoden 2",        icon = love.graphics.newImage("ps1-cd.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*5, r = 0, v = 0 },
 			},
 		},
 		{
 			name = "NeoGeo",
 			icon = love.graphics.newImage("neogeo.png"),
 			a = 128,
-			z = PASSIVE_ZOOM,
+			z = C_PASSIVE_ZOOM,
 			active_item = 1,
 			items = {
-				{ name = "Metal Slug",   icon = love.graphics.newImage("item.png"), a = 0, z = ACTIVE_ZOOM, y = VSPACING*1 },
-				{ name = "Metal Slug 2", icon = love.graphics.newImage("item.png"), a = 0, z = PASSIVE_ZOOM, y = VSPACING*2 },
-				{ name = "Metal Slug 3", icon = love.graphics.newImage("item.png"), a = 0, z = PASSIVE_ZOOM, y = VSPACING*3 },
-				{ name = "Metal Slug 4", icon = love.graphics.newImage("item.png"), a = 0, z = PASSIVE_ZOOM, y = VSPACING*4 },
-				{ name = "Metal Slug 5", icon = love.graphics.newImage("item.png"), a = 0, z = PASSIVE_ZOOM, y = VSPACING*5 },
-				{ name = "Metal Slug X", icon = love.graphics.newImage("item.png"), a = 0, z = PASSIVE_ZOOM, y = VSPACING*6 },
-				{ name = "Bomberman",    icon = love.graphics.newImage("item.png"), a = 0, z = PASSIVE_ZOOM, y = VSPACING*7 },
+				{ name = "Metal Slug",   icon = love.graphics.newImage("item.png"), a = 0, z = I_ACTIVE_ZOOM,  y = VSPACING*1, r = 0, v = 0 },
+				{ name = "Metal Slug 2", icon = love.graphics.newImage("item.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*2, r = 0, v = 0 },
+				{ name = "Metal Slug 3", icon = love.graphics.newImage("item.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*3, r = 0, v = 0 },
+				{ name = "Metal Slug 4", icon = love.graphics.newImage("item.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*4, r = 0, v = 0 },
+				{ name = "Metal Slug 5", icon = love.graphics.newImage("item.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*5, r = 0, v = 0 },
+				{ name = "Metal Slug X", icon = love.graphics.newImage("item.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*6, r = 0, v = 0 },
+				{ name = "Bomberman",    icon = love.graphics.newImage("item.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*7, r = 0, v = 0 },
 			},
 		},
 	}
@@ -108,10 +114,10 @@ function love.load()
 	--img_background = love.graphics.newImage("bg.png")
 
 	overlay = { a = 255 }
-
 	tween(1, overlay, { a = 0 }, 'inOutQuad')
 end
 
+-- Move the categories left or right depending on the active_category var
 function switch_categories()
 
 	love.audio.play(snd_switch)
@@ -123,7 +129,7 @@ function switch_categories()
 	for i, category in ipairs(categories) do
 		if i == active_category then
 			tween(0.25, category, { a = 255 }, 'inOutQuad')
-			tween(0.25, category, { z = ACTIVE_ZOOM }, 'outBack')
+			tween(0.25, category, { z = C_ACTIVE_ZOOM }, 'outBack')
 			for j, item in ipairs(category.items) do
 				if j == category.active_item then
 					tween(0.25, item, { a = 255 }, 'inOutQuad')
@@ -133,7 +139,7 @@ function switch_categories()
 			end
 		else
 			tween(0.25, category, { a = 128 }, 'inOutQuad')
-			tween(0.25, category, { z = PASSIVE_ZOOM }, 'outBack')
+			tween(0.25, category, { z = C_PASSIVE_ZOOM }, 'outBack')
 			for j, item in ipairs(category.items) do
 				tween(0.25, item, { a = 0 }, 'inOutQuad')
 			end
@@ -143,6 +149,7 @@ function switch_categories()
 	--tween(0.25, obj_background, { x = -100 * (active_category-1) }, 'inOutQuad')
 end
 
+-- Move the items of the active category up or down
 function switch_items ()
 
 	love.audio.play(snd_switch)
@@ -152,23 +159,27 @@ function switch_items ()
 			wallpaper = item.bg
 		end
 
+		-- Above items
 		if y < categories[active_category].active_item  then
 			tween(0.25, item, { a = 128 }, 'inOutQuad')
 			tween(0.25, item, { y = VSPACING*(y-categories[active_category].active_item)}, 'inOutQuad')
-			tween(0.25, item, { z = PASSIVE_ZOOM }, 'outBack')
+			tween(0.25, item, { z = I_PASSIVE_ZOOM }, 'outBack')
+		-- Active item
 		elseif y == categories[active_category].active_item then
 			tween(0.25, item, { a = 255 }, 'inOutQuad')
 			tween(0.25, item, { y = VSPACING}, 'inOutQuad')
-			tween(0.25, item, { z = ACTIVE_ZOOM }, 'outBack')
+			tween(0.25, item, { z = I_ACTIVE_ZOOM }, 'outBack')
+		-- Under items
 		elseif y > categories[active_category].active_item then
 			tween(0.25, item, { a = 128 }, 'inOutQuad')
 			tween(0.25, item, { y = VSPACING*(y-categories[active_category].active_item +1)}, 'inOutQuad')
-			tween(0.25, item, { z = PASSIVE_ZOOM }, 'outBack')
+			tween(0.25, item, { z = I_PASSIVE_ZOOM }, 'outBack')
 		end
 	end
 end
 
 function love.update(dt)
+	-- handle category switch
 	if love.keyboard.isDown("right") and love.timer.getTime() > t1 + 0.3 and active_category < table.getn(categories) then
 		t1 = love.timer.getTime()
 		active_category = active_category + 1
@@ -180,6 +191,7 @@ function love.update(dt)
 		switch_categories()
 	end
 
+	-- handle item switch
 	if love.keyboard.isDown("down") and love.timer.getTime() > t1 + 0.15 and categories[active_category].active_item < table.getn(categories[active_category].items) then
 		t1 = love.timer.getTime()
 		categories[active_category].active_item = categories[active_category].active_item + 1
@@ -191,7 +203,34 @@ function love.update(dt)
 		switch_items()
 	end
 
+
+	for i, category in ipairs(categories) do
+		for j, item in ipairs(category.items) do
+			if i == 5 and i == active_category and j == category.active_item then
+				item.v = item.v + (math.pi/1024)
+				rotation_speed(item, dt)
+			else
+				item.v = item.v - (math.pi/1024)
+				rotation_speed(item, dt)
+			end
+		end
+	end
+
 	tween.update(dt)
+end
+
+function rotation_speed(item, dt)
+	if item.v > math.pi/4 then
+		item.v = math.pi/4
+	elseif item.v < 0 then
+		item.v = 0
+	end
+
+	item.r = item.r + item.v
+
+	if item.r >= math.pi*2 then
+		item.r = 0
+	end
 end
 
 function love.draw()
@@ -204,12 +243,10 @@ function love.draw()
 	-- Print category name
 	love.graphics.setColor(236, 240, 241)
 	love.graphics.print(categories[active_category].name, 10, 10)
+	-- Print the current date
 	love.graphics.printf(os.date("%x %H:%M", os.time()), 0, 10, WIDTH-10, 'right')
 
-	--love.graphics.setColor(44, 62, 80)
-	--love.graphics.rectangle('fill', 430, 0, 252, 900)
-
-
+	-- Draw categories and items
 	for i, category in ipairs(categories) do
 
 		-- rotate the settings icon if active
@@ -217,19 +254,19 @@ function love.draw()
 			r = r + 0.0025
 		end
 
+		-- Draw items
 		for j, item in ipairs(category.items) do
-			love.graphics.setColor(236, 240, 241, item.a)
+			love.graphics.setColor(236, 240, 241, item.a) -- set item transparency
 			if i == 1 and j == category.active_item then
 				love.graphics.draw( item.icon, 156 + (HSPACING*i) + all_categories.x, 300    + item.y, -r, item.z, item.z, 192/2, 192/2)
 			else
-				love.graphics.draw( item.icon, 156 + (HSPACING*i) + all_categories.x, 300    + item.y, 0, item.z, item.z, 192/2, 192/2)
+				love.graphics.draw( item.icon, 156 + (HSPACING*i) + all_categories.x, 300    + item.y, item.r, item.z, item.z, 192/2, 192/2)
 			end
 			love.graphics.print(item.name, 256 + (HSPACING*i) + all_categories.x, 300-15 + item.y)
 		end
 
-		-- Set transparency
-		love.graphics.setColor(255,255,255,category.a)
-
+		-- Draw category
+		love.graphics.setColor(255,255,255,category.a) -- set category transparency
 		if i == 1 then
 			love.graphics.draw(category.icon, 156 + (HSPACING*i) + all_categories.x, 300, r, category.z, category.z, 192/2, 192/2)
 		else
@@ -238,6 +275,7 @@ function love.draw()
 		
 	end
 
+	-- Draw the black overlay that fade of during startup
 	love.graphics.setColor(0, 0, 0, overlay.a)
 	love.graphics.rectangle('fill', 0, 0, 1440, 900)
 end
