@@ -15,8 +15,8 @@
    id="svg3000"
    version="1.1"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="ps1-cd.svg"
-   inkscape:export-filename="/home/kivutar/Bureau/lakka-menu/playstation-cd.png"
+   sodipodi:docname="neogeo-cd.svg"
+   inkscape:export-filename="/home/niouby/informatique/lakka-menu/neogeo-cd.png"
    inkscape:export-xdpi="270"
    inkscape:export-ydpi="270">
   <defs
@@ -29,8 +29,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="10.24"
-     inkscape:cx="9.2233669"
-     inkscape:cy="33.235689"
+     inkscape:cx="29.791468"
+     inkscape:cy="35.123991"
      inkscape:document-units="px"
      inkscape:current-layer="layer3"
      showgrid="true"
@@ -55,7 +55,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -84,12 +84,12 @@
      inkscape:label="logo"
      style="display:inline">
     <path
-       style="fill:#2c3e50;fill-opacity:1;stroke:none"
+       style="fill:#ecf0f1;fill-opacity:1;stroke:none"
        d="M 32,1 C 14.879173,1 1,14.879173 1,32 1,49.120827 14.879173,63 32,63 49.120827,63 63,49.120827 63,32 63,14.879173 49.120827,1 32,1 z m 0,27 c 2.209139,0 4,1.790861 4,4 0,2.209139 -1.790861,4 -4,4 -2.209139,0 -4,-1.790861 -4,-4 0,-2.209139 1.790861,-4 4,-4 z"
        id="path3012"
        inkscape:connector-curvature="0" />
     <path
-       style="fill:#bdc3c7;fill-opacity:1;stroke:none"
+       style="fill:#3498db;fill-opacity:1;stroke:none;stroke-opacity:1"
        d="M 32,2 C 15.431458,2 2,15.431458 2,32 2,48.568542 15.431458,62 32,62 48.568542,62 62,48.568542 62,32 62,15.431458 48.568542,2 32,2 z m 0,26 c 2.209139,0 4,1.790861 4,4 0,2.209139 -1.790861,4 -4,4 -2.209139,0 -4,-1.790861 -4,-4 0,-2.209139 1.790861,-4 4,-4 z"
        id="path3981"
        inkscape:connector-curvature="0" />
@@ -104,17 +104,9 @@
        d="m 36,32 a 4,4 0 1 1 -8,0 4,4 0 1 1 8,0 z"
        transform="translate(61,-6)" />
     <path
-       style="fill:#34495e;fill-opacity:1;stroke:#2c3e50;stroke-opacity:1"
+       style="fill:#ecf0f1;fill-opacity:1;stroke:#bdc3c7;stroke-opacity:1"
        d="m 32,20 c -6.627417,0 -12,5.372583 -12,12 0,6.627417 5.372583,12 12,12 6.627417,0 12,-5.372583 12,-12 0,-6.627417 -5.372583,-12 -12,-12 z m 0,8 c 2.209139,0 4,1.790861 4,4 0,2.209139 -1.790861,4 -4,4 -2.209139,0 -4,-1.790861 -4,-4 0,-2.209139 1.790861,-4 4,-4 z"
        id="path3958"
        inkscape:connector-curvature="0" />
-    <rect
-       style="fill:#3498db;fill-opacity:1;stroke:none;stroke-opacity:1"
-       id="rect4002"
-       width="28"
-       height="4"
-       x="18"
-       y="13"
-       ry="2" />
   </g>
 </svg>

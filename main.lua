@@ -10,7 +10,7 @@ function love.load()
 
 	WIDTH, HEIGHT = love.window.getDimensions()
 	HSPACING = 380 -- horizontal spacing between 2 categories
-	VSPACING = 150 -- vertical spacing between 2 items
+	VSPACING = 192 -- vertical spacing between 2 items
 	C_ACTIVE_ZOOM = 1
 	C_PASSIVE_ZOOM = 0.75
 	I_ACTIVE_ZOOM = 0.666666666
@@ -30,6 +30,17 @@ function love.load()
 			},
 		},
 		{
+			name = "SEGA MasterSystem",
+			icon = love.graphics.newImage("mastersystem.png"),
+			a = 128,
+			z = C_PASSIVE_ZOOM,
+			active_item = 1,
+			items = {
+				{ name = "Sonic Chaos", icon = love.graphics.newImage("mastersystem-cartidge.png"), a = 0, z = I_ACTIVE_ZOOM,  y = VSPACING*1, r = 0, v = 0 },
+				{ name = "Zool",        icon = love.graphics.newImage("mastersystem-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*2, r = 0, v = 0 },
+			},
+		},
+		{
 			name = "Nintendo Entertainment System",
 			icon = love.graphics.newImage("nes.png"),
 			a = 128,
@@ -42,21 +53,6 @@ function love.load()
 			},
 		},
 		{
-			name = "Super Nintendo",
-			icon = love.graphics.newImage("snes.png"),
-			lib = '/usr/lib/libretro/libretro-snes9x-next.so',
-			a = 128,
-			z = C_PASSIVE_ZOOM,
-			active_item = 1,
-			items = {
-				{ name = "Super Bomberman",     icon = love.graphics.newImage("snes-cartidge.png"), a = 0, z = I_ACTIVE_ZOOM,  y = VSPACING*1, r = 0, v = 0, bg = love.graphics.newImage("bg_bomberman.png") },
-				{ name = "Secret of Mana",      icon = love.graphics.newImage("snes-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*2, r = 0, v = 0, bg = love.graphics.newImage("bg_som.png") },
-				{ name = "Super Metroid",       icon = love.graphics.newImage("snes-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*3, r = 0, v = 0, bg = love.graphics.newImage("bg_metroid.png"), rom = '/home/kivutar/Jeux/roms/metroid.smc' },
-				{ name = "The Legend of Zelda", icon = love.graphics.newImage("snes-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*4, r = 0, v = 0, bg = love.graphics.newImage("bg_zelda.png"), rom = '/home/kivutar/Jeux/roms/zelda.smc' },
-				{ name = "Tactics Ogre",        icon = love.graphics.newImage("snes-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*5, r = 0, v = 0, bg = love.graphics.newImage("bg_to.png") },
-			},
-		},
-		{
 			name = "SEGA Megadrive",
 			icon = love.graphics.newImage("megadrive.png"),
 			lib = '/usr/lib/libretro/libretro-genplus.so',
@@ -64,8 +60,34 @@ function love.load()
 			z = C_PASSIVE_ZOOM,
 			active_item = 1,
 			items = {
-				{ name = "Sonic 2", icon = love.graphics.newImage("item.png"), a = 0, z = I_ACTIVE_ZOOM,  y = VSPACING*1, r = 0, v = 0 },
-				{ name = "Sonic 3", icon = love.graphics.newImage("item.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*2, r = 0, v = 0, rom = "/home/kivutar/Jeux/roms/sonic3.smd" },
+				{ name = "Sonic 2", icon = love.graphics.newImage("megadrive-cartidge.png"), a = 0, z = I_ACTIVE_ZOOM,  y = VSPACING*1, r = 0, v = 0 },
+				{ name = "Sonic 3", icon = love.graphics.newImage("megadrive-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*2, r = 0, v = 0},
+			},
+		},
+		{
+			name = "GameBoy",
+			icon = love.graphics.newImage("gb.png"),
+			a = 128,
+			z = C_PASSIVE_ZOOM,
+			active_item = 1,
+			items = {
+				{ name = "Pokemon Jaune", icon = love.graphics.newImage("gbcolor-cartidge.png"), a = 0, z = I_ACTIVE_ZOOM,  y = VSPACING*1, r = 0, v = 0 },
+				{ name = "Pokemon Rouge", icon = love.graphics.newImage("gbcolor-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*2, r = 0, v = 0 },
+			},
+		},
+		{
+			name = "Super Nintendo",
+			icon = love.graphics.newImage("snes.png"),
+			lib = '/usr/lib/libretro/libretro-snes9x-next.so',
+			a = 128,
+			z = C_PASSIVE_ZOOM,
+			active_item = 1,
+			items = {
+				{ name = "Super Bomberman",     icon = love.graphics.newImage("snes-cartidge.png"), a = 0, z = I_ACTIVE_ZOOM,  y = VSPACING*1, r = 0, v = 0},
+				{ name = "Secret of Mana",      icon = love.graphics.newImage("snes-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*2, r = 0, v = 0},
+				{ name = "Super Metroid",       icon = love.graphics.newImage("snes-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*3, r = 0, v = 0},
+				{ name = "The Legend of Zelda", icon = love.graphics.newImage("snes-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*4, r = 0, v = 0},
+				{ name = "Tactics Ogre",        icon = love.graphics.newImage("snes-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*5, r = 0, v = 0},
 			},
 		},
 		{
@@ -83,24 +105,44 @@ function love.load()
 			},
 		},
 		{
+			name = "GameBoy Color",
+			icon = love.graphics.newImage("gbcolor.png"),
+			a = 128,
+			z = C_PASSIVE_ZOOM,
+			active_item = 1,
+			items = {
+				{ name = "Pokemon Or",           icon = love.graphics.newImage("gbcolor-cartidge.png"), a = 0, z = I_ACTIVE_ZOOM,  y = VSPACING*1, r = 0, v = 0 },
+				{ name = "New Super Mario Bros", icon = love.graphics.newImage("gbcolor-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*2, r = 0, v = 0 },
+			},
+		},
+		{
 			name = "NeoGeo",
 			icon = love.graphics.newImage("neogeo.png"),
 			a = 128,
 			z = C_PASSIVE_ZOOM,
 			active_item = 1,
 			items = {
-				{ name = "Metal Slug",   icon = love.graphics.newImage("item.png"), a = 0, z = I_ACTIVE_ZOOM,  y = VSPACING*1, r = 0, v = 0 },
-				{ name = "Metal Slug 2", icon = love.graphics.newImage("item.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*2, r = 0, v = 0 },
-				{ name = "Metal Slug 3", icon = love.graphics.newImage("item.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*3, r = 0, v = 0 },
-				{ name = "Metal Slug 4", icon = love.graphics.newImage("item.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*4, r = 0, v = 0 },
-				{ name = "Metal Slug 5", icon = love.graphics.newImage("item.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*5, r = 0, v = 0 },
-				{ name = "Metal Slug X", icon = love.graphics.newImage("item.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*6, r = 0, v = 0 },
-				{ name = "Bomberman",    icon = love.graphics.newImage("item.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*7, r = 0, v = 0 },
+				{ name = "Metal Slug",   icon = love.graphics.newImage("neogeo-cd.png"), a = 0, z = I_ACTIVE_ZOOM,  y = VSPACING*1, r = 0, v = 0 },
+				{ name = "Metal Slug 2", icon = love.graphics.newImage("neogeo-cd.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*2, r = 0, v = 0 },
+				{ name = "Metal Slug 3", icon = love.graphics.newImage("neogeo-cd.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*3, r = 0, v = 0 },
+				{ name = "Metal Slug 4", icon = love.graphics.newImage("neogeo-cd.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*4, r = 0, v = 0 },
+				{ name = "Metal Slug 5", icon = love.graphics.newImage("neogeo-cd.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*5, r = 0, v = 0 },
+				{ name = "Metal Slug X", icon = love.graphics.newImage("neogeo-cd.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*6, r = 0, v = 0 },
+				{ name = "Bomberman",    icon = love.graphics.newImage("neogeo-cd.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*7, r = 0, v = 0 },
+			},
+		},
+		{
+			name = "Cave Story",
+			icon = love.graphics.newImage("cavestory.png"),
+			a = 128,
+			z = C_PASSIVE_ZOOM,
+			active_item = 1,
+			items = {
 			},
 		},
 	}
 
-	wallpaper = love.graphics.newImage("wallpaper.png")
+	-- wallpaper = love.graphics.newImage("wallpaper.png")
 
 	active_category = 1
 
@@ -206,7 +248,7 @@ function love.update(dt)
 
 	for i, category in ipairs(categories) do
 		for j, item in ipairs(category.items) do
-			if i == 5 and i == active_category and j == category.active_item then
+			if i == 7 and i == active_category and j == category.active_item then
 				item.v = item.v + (math.pi/1024)
 				rotation_speed(item, dt)
 			else
@@ -277,7 +319,7 @@ function love.draw()
 
 	-- Draw the black overlay that fade of during startup
 	love.graphics.setColor(0, 0, 0, overlay.a)
-	love.graphics.rectangle('fill', 0, 0, 1440, 900)
+	love.graphics.rectangle('fill', 0, 0, 1920, 1080)
 end
 
 -- Escape the menu

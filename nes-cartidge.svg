@@ -16,7 +16,7 @@
    width="64"
    height="64"
    sodipodi:docname="nes-cartidge.svg"
-   inkscape:export-filename="/home/kivutar/Bureau/lakka-menu/nes-cartidge.png"
+   inkscape:export-filename="/home/niouby/informatique/lakka-menu/nes-cartidge.png"
    inkscape:export-xdpi="270"
    inkscape:export-ydpi="270">
   <metadata
@@ -42,12 +42,12 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1440"
-     inkscape:window-height="837"
+     inkscape:window-width="1920"
+     inkscape:window-height="1014"
      id="namedview3963"
      showgrid="true"
      inkscape:zoom="12.714453"
-     inkscape:cx="33.937785"
+     inkscape:cx="18.797535"
      inkscape:cy="48.620139"
      inkscape:window-x="0"
      inkscape:window-y="27"
@@ -178,9 +178,12 @@
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccc" />
     <g
-       style="fill:#4c5555;fill-opacity:1;display:inline"
+       style="fill:#616c6d;fill-opacity:1;display:inline"
        id="g4608-5"
-       transform="matrix(0.25,0,0,0.11085668,3.75,0.89143325)">
+       transform="matrix(0.25,0,0,0.11085668,3.75,0.89143325)"
+       inkscape:export-filename="/home/niouby/informatique/lakka-menu/nes-cartidge.png"
+       inkscape:export-xdpi="270"
+       inkscape:export-ydpi="270">
       <rect
          ry="1.0206566"
          y="0.9793433"
@@ -188,7 +191,7 @@
          height="9.0206566"
          width="12"
          id="rect4015-4-2"
-         style="fill:#4c5555;fill-opacity:1;stroke:none" />
+         style="fill:#616c6d;fill-opacity:1;stroke:none" />
       <rect
          ry="0"
          y="0.9793433"
@@ -196,12 +199,15 @@
          height="1.0738877"
          width="12"
          id="rect4525-9-5"
-         style="fill:#4c5555;fill-opacity:1;stroke:none" />
+         style="fill:#616c6d;fill-opacity:1;stroke:none" />
     </g>
     <g
-       style="fill:#4c5555;fill-opacity:1;display:inline"
+       style="fill:#616c6d;fill-opacity:1;display:inline"
        id="g4608-5-8"
-       transform="matrix(0.25,0,0,0.11085668,50.75,0.89143325)">
+       transform="matrix(0.25,0,0,0.11085668,50.75,0.89143325)"
+       inkscape:export-filename="/home/niouby/informatique/lakka-menu/nes-cartidge.png"
+       inkscape:export-xdpi="270"
+       inkscape:export-ydpi="270">
       <rect
          ry="1.0206566"
          y="0.9793433"
@@ -209,7 +215,7 @@
          height="9.0206566"
          width="12"
          id="rect4015-4-2-5"
-         style="fill:#4c5555;fill-opacity:1;stroke:none" />
+         style="fill:#616c6d;fill-opacity:1;stroke:none" />
       <rect
          ry="0"
          y="0.9793433"
@@ -217,7 +223,7 @@
          height="1.0738877"
          width="12"
          id="rect4525-9-5-1"
-         style="fill:#4c5555;fill-opacity:1;stroke:none" />
+         style="fill:#616c6d;fill-opacity:1;stroke:none" />
     </g>
     <rect
        style="fill:#95a5a6;fill-opacity:1;stroke:none"
