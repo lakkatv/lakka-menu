@@ -9,12 +9,12 @@ function love.load()
 	love.graphics.setBackgroundColor(26, 188, 156)
 
 	WIDTH, HEIGHT = love.window.getDimensions()
-	HSPACING = 380 -- horizontal spacing between 2 categories
-	VSPACING = 192 -- vertical spacing between 2 items
+	HSPACING = 300 -- horizontal spacing between 2 categories
+	VSPACING = 100 -- vertical spacing between 2 items
 	C_ACTIVE_ZOOM = 1
-	C_PASSIVE_ZOOM = 0.75
-	I_ACTIVE_ZOOM = 0.666666666
-	I_PASSIVE_ZOOM = 0.5
+	C_PASSIVE_ZOOM = 0.5
+	I_ACTIVE_ZOOM = 0.75
+	I_PASSIVE_ZOOM = 0.35
 
 	categories = {
 		{
@@ -24,8 +24,8 @@ function love.load()
 			z = C_ACTIVE_ZOOM,
 			active_item = 1,
 			items = {
-				{ name = "Theme",   icon = love.graphics.newImage("setting.png"), a = 255, z = I_ACTIVE_ZOOM,  y = VSPACING*1, r = 0, v = 0 },
-				{ name = "Network", icon = love.graphics.newImage("setting.png"), a = 128, z = I_PASSIVE_ZOOM, y = VSPACING*2, r = 0, v = 0 },
+				{ name = "Theme",   icon = love.graphics.newImage("setting.png"), a = 255, z = I_ACTIVE_ZOOM,  y = VSPACING*2.35, r = 0, v = 0 },
+				{ name = "Network", icon = love.graphics.newImage("setting.png"), a = 128, z = I_PASSIVE_ZOOM, y = VSPACING*4   , r = 0, v = 0 },
 
 			},
 		},
@@ -36,8 +36,8 @@ function love.load()
 			z = C_PASSIVE_ZOOM,
 			active_item = 1,
 			items = {
-				{ name = "Sonic Chaos", icon = love.graphics.newImage("mastersystem-cartidge.png"), a = 0, z = I_ACTIVE_ZOOM,  y = VSPACING*1, r = 0, v = 0 },
-				{ name = "Zool",        icon = love.graphics.newImage("mastersystem-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*2, r = 0, v = 0 },
+				{ name = "Sonic Chaos", icon = love.graphics.newImage("mastersystem-cartidge.png"), a = 0, z = I_ACTIVE_ZOOM,  y = VSPACING*2.35, r = 0, v = 0 },
+				{ name = "Zool",        icon = love.graphics.newImage("mastersystem-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*4   , r = 0, v = 0 },
 			},
 		},
 		{
@@ -47,9 +47,9 @@ function love.load()
 			z = C_PASSIVE_ZOOM,
 			active_item = 1,
 			items = {
-				{ name = "Mario Bros.", icon = love.graphics.newImage("nes-cartidge.png"), a = 0, z = I_ACTIVE_ZOOM,  y = VSPACING*1, r = 0, v = 0 },
-				{ name = "Mario Bros.", icon = love.graphics.newImage("nes-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*2, r = 0, v = 0 },
-				{ name = "Mario Bros.", icon = love.graphics.newImage("nes-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*3, r = 0, v = 0 },
+				{ name = "Mario Bros.", icon = love.graphics.newImage("nes-cartidge.png"), a = 0, z = I_ACTIVE_ZOOM,  y = VSPACING*2.35, r = 0, v = 0 },
+				{ name = "Mario Bros.", icon = love.graphics.newImage("nes-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*4   , r = 0, v = 0 },
+				{ name = "Mario Bros.", icon = love.graphics.newImage("nes-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*5   , r = 0, v = 0 },
 			},
 		},
 		{
@@ -60,8 +60,8 @@ function love.load()
 			z = C_PASSIVE_ZOOM,
 			active_item = 1,
 			items = {
-				{ name = "Sonic 2", icon = love.graphics.newImage("megadrive-cartidge.png"), a = 0, z = I_ACTIVE_ZOOM,  y = VSPACING*1, r = 0, v = 0 },
-				{ name = "Sonic 3", icon = love.graphics.newImage("megadrive-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*2, r = 0, v = 0},
+				{ name = "Sonic 2", icon = love.graphics.newImage("megadrive-cartidge.png"), a = 0, z = I_ACTIVE_ZOOM,  y = VSPACING*2.35, r = 0, v = 0 },
+				{ name = "Sonic 3", icon = love.graphics.newImage("megadrive-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*4   , r = 0, v = 0},
 			},
 		},
 		{
@@ -71,8 +71,8 @@ function love.load()
 			z = C_PASSIVE_ZOOM,
 			active_item = 1,
 			items = {
-				{ name = "Pokemon Jaune", icon = love.graphics.newImage("gbcolor-cartidge.png"), a = 0, z = I_ACTIVE_ZOOM,  y = VSPACING*1, r = 0, v = 0 },
-				{ name = "Pokemon Rouge", icon = love.graphics.newImage("gbcolor-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*2, r = 0, v = 0 },
+				{ name = "Pokemon Jaune", icon = love.graphics.newImage("gbcolor-cartidge.png"), a = 0, z = I_ACTIVE_ZOOM,  y = VSPACING*2.35, r = 0, v = 0 },
+				{ name = "Pokemon Rouge", icon = love.graphics.newImage("gbcolor-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*4   , r = 0, v = 0 },
 			},
 		},
 		{
@@ -83,11 +83,11 @@ function love.load()
 			z = C_PASSIVE_ZOOM,
 			active_item = 1,
 			items = {
-				{ name = "Super Bomberman",     icon = love.graphics.newImage("snes-cartidge.png"), a = 0, z = I_ACTIVE_ZOOM,  y = VSPACING*1, r = 0, v = 0},
-				{ name = "Secret of Mana",      icon = love.graphics.newImage("snes-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*2, r = 0, v = 0},
-				{ name = "Super Metroid",       icon = love.graphics.newImage("snes-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*3, r = 0, v = 0},
-				{ name = "The Legend of Zelda", icon = love.graphics.newImage("snes-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*4, r = 0, v = 0},
-				{ name = "Tactics Ogre",        icon = love.graphics.newImage("snes-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*5, r = 0, v = 0},
+				{ name = "Super Bomberman",     icon = love.graphics.newImage("snes-cartidge.png"), a = 0, z = I_ACTIVE_ZOOM,  y = VSPACING*2.35, r = 0, v = 0},
+				{ name = "Secret of Mana",      icon = love.graphics.newImage("snes-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*4   , r = 0, v = 0},
+				{ name = "Super Metroid",       icon = love.graphics.newImage("snes-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*5   , r = 0, v = 0},
+				{ name = "The Legend of Zelda", icon = love.graphics.newImage("snes-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*6   , r = 0, v = 0},
+				{ name = "Tactics Ogre",        icon = love.graphics.newImage("snes-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*7   , r = 0, v = 0},
 			},
 		},
 		{
@@ -97,11 +97,11 @@ function love.load()
 			z = C_PASSIVE_ZOOM,
 			active_item = 1,
 			items = {
-				{ name = "Crash Bandicoot",   icon = love.graphics.newImage("ps1-cd.png"), a = 0, z = I_ACTIVE_ZOOM,  y = VSPACING*1, r = 0, v = 0 },
-				{ name = "Final Fantasy VII", icon = love.graphics.newImage("ps1-cd.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*2, r = 0, v = 0 },
-				{ name = "Xenogears",         icon = love.graphics.newImage("ps1-cd.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*3, r = 0, v = 0 },
-				{ name = "Suikoden 2",        icon = love.graphics.newImage("ps1-cd.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*4, r = 0, v = 0 },
-				{ name = "Suikoden 2",        icon = love.graphics.newImage("ps1-cd.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*5, r = 0, v = 0 },
+				{ name = "Crash Bandicoot",   icon = love.graphics.newImage("ps1-cd.png"), a = 0, z = I_ACTIVE_ZOOM,  y = VSPACING*2.35, r = 0, v = 0 },
+				{ name = "Final Fantasy VII", icon = love.graphics.newImage("ps1-cd.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*4   , r = 0, v = 0 },
+				{ name = "Xenogears",         icon = love.graphics.newImage("ps1-cd.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*5   , r = 0, v = 0 },
+				{ name = "Suikoden 2",        icon = love.graphics.newImage("ps1-cd.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*6   , r = 0, v = 0 },
+				{ name = "Suikoden 2",        icon = love.graphics.newImage("ps1-cd.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*7   , r = 0, v = 0 },
 			},
 		},
 		{
@@ -111,8 +111,8 @@ function love.load()
 			z = C_PASSIVE_ZOOM,
 			active_item = 1,
 			items = {
-				{ name = "Pokemon Or",           icon = love.graphics.newImage("gbcolor-cartidge.png"), a = 0, z = I_ACTIVE_ZOOM,  y = VSPACING*1, r = 0, v = 0 },
-				{ name = "New Super Mario Bros", icon = love.graphics.newImage("gbcolor-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*2, r = 0, v = 0 },
+				{ name = "Pokemon Or",           icon = love.graphics.newImage("gbcolor-cartidge.png"), a = 0, z = I_ACTIVE_ZOOM,  y = VSPACING*2.35, r = 0, v = 0 },
+				{ name = "New Super Mario Bros", icon = love.graphics.newImage("gbcolor-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*4   , r = 0, v = 0 },
 			},
 		},
 		{
@@ -122,13 +122,13 @@ function love.load()
 			z = C_PASSIVE_ZOOM,
 			active_item = 1,
 			items = {
-				{ name = "Metal Slug",   icon = love.graphics.newImage("neogeo-cd.png"), a = 0, z = I_ACTIVE_ZOOM,  y = VSPACING*1, r = 0, v = 0 },
-				{ name = "Metal Slug 2", icon = love.graphics.newImage("neogeo-cd.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*2, r = 0, v = 0 },
-				{ name = "Metal Slug 3", icon = love.graphics.newImage("neogeo-cd.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*3, r = 0, v = 0 },
-				{ name = "Metal Slug 4", icon = love.graphics.newImage("neogeo-cd.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*4, r = 0, v = 0 },
-				{ name = "Metal Slug 5", icon = love.graphics.newImage("neogeo-cd.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*5, r = 0, v = 0 },
-				{ name = "Metal Slug X", icon = love.graphics.newImage("neogeo-cd.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*6, r = 0, v = 0 },
-				{ name = "Bomberman",    icon = love.graphics.newImage("neogeo-cd.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*7, r = 0, v = 0 },
+				{ name = "Metal Slug",   icon = love.graphics.newImage("neogeo-cd.png"), a = 0, z = I_ACTIVE_ZOOM,  y = VSPACING*2.35, r = 0, v = 0 },
+				{ name = "Metal Slug 2", icon = love.graphics.newImage("neogeo-cd.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*4   , r = 0, v = 0 },
+				{ name = "Metal Slug 3", icon = love.graphics.newImage("neogeo-cd.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*5   , r = 0, v = 0 },
+				{ name = "Metal Slug 4", icon = love.graphics.newImage("neogeo-cd.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*6   , r = 0, v = 0 },
+				{ name = "Metal Slug 5", icon = love.graphics.newImage("neogeo-cd.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*7   , r = 0, v = 0 },
+				{ name = "Metal Slug X", icon = love.graphics.newImage("neogeo-cd.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*8   , r = 0, v = 0 },
+				{ name = "Bomberman",    icon = love.graphics.newImage("neogeo-cd.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*9   , r = 0, v = 0 },
 			},
 		},
 		{
@@ -209,12 +209,12 @@ function switch_items ()
 		-- Active item
 		elseif y == categories[active_category].active_item then
 			tween(0.25, item, { a = 255 }, 'inOutQuad')
-			tween(0.25, item, { y = VSPACING}, 'inOutQuad')
+			tween(0.25, item, { y = VSPACING*2.35}, 'inOutQuad')
 			tween(0.25, item, { z = I_ACTIVE_ZOOM }, 'outBack')
 		-- Under items
 		elseif y > categories[active_category].active_item then
 			tween(0.25, item, { a = 128 }, 'inOutQuad')
-			tween(0.25, item, { y = VSPACING*(y-categories[active_category].active_item +1)}, 'inOutQuad')
+			tween(0.25, item, { y = VSPACING*(y-categories[active_category].active_item + 3)}, 'inOutQuad')
 			tween(0.25, item, { z = I_PASSIVE_ZOOM }, 'outBack')
 		end
 	end
@@ -300,11 +300,11 @@ function love.draw()
 		for j, item in ipairs(category.items) do
 			love.graphics.setColor(236, 240, 241, item.a) -- set item transparency
 			if i == 1 and j == category.active_item then
-				love.graphics.draw( item.icon, 156 + (HSPACING*i) + all_categories.x, 300    + item.y, -r, item.z, item.z, 192/2, 192/2)
+				love.graphics.draw( item.icon, 156 + (HSPACING*i) + all_categories.x, 300 + item.y - 25, -r, item.z, item.z, 192/2, 192/2)
 			else
-				love.graphics.draw( item.icon, 156 + (HSPACING*i) + all_categories.x, 300    + item.y, item.r, item.z, item.z, 192/2, 192/2)
+				love.graphics.draw( item.icon, 156 + (HSPACING*i) + all_categories.x, 300 + item.y - 25, item.r, item.z, item.z, 192/2, 192/2)
 			end
-			love.graphics.print(item.name, 256 + (HSPACING*i) + all_categories.x, 300-15 + item.y)
+			love.graphics.print(item.name, 256 + (HSPACING*i) + all_categories.x, 300-15 + item.y - 25)
 		end
 
 		-- Draw category
