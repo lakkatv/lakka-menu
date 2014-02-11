@@ -71,8 +71,8 @@ function love.load()
 			z = C_PASSIVE_ZOOM,
 			active_item = 1,
 			items = {
-				{ name = "Pokemon Jaune", icon = love.graphics.newImage("gbcolor-cartidge.png"), a = 0, z = I_ACTIVE_ZOOM,  y = VSPACING*2.35, r = 0, v = 0 },
-				{ name = "Pokemon Rouge", icon = love.graphics.newImage("gbcolor-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*4   , r = 0, v = 0 },
+				{ name = "Pokemon Jaune", icon = love.graphics.newImage("gb-cartidge.png"), a = 0, z = I_ACTIVE_ZOOM,  y = VSPACING*2.35, r = 0, v = 0 },
+				{ name = "Pokemon Rouge", icon = love.graphics.newImage("gb-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*4   , r = 0, v = 0 },
 			},
 		},
 		{
