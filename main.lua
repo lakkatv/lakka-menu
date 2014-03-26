@@ -19,132 +19,110 @@ function love.load()
 	categories = {
 		{
 			name = "Settings",
-			icon = love.graphics.newImage("settings.png"),
-			a = 255,
-			z = C_ACTIVE_ZOOM,
-			active_item = 1,
+			prefix = "settings",
 			items = {
-				{ name = "Theme",   icon = love.graphics.newImage("setting.png"), a = 255, z = I_ACTIVE_ZOOM,  y = VSPACING*2.35, r = 0, v = 0 },
-				{ name = "Network", icon = love.graphics.newImage("setting.png"), a = 128, z = I_PASSIVE_ZOOM, y = VSPACING*4   , r = 0, v = 0 },
-
+				{ name = "Video Options" },
+				{ name = "Audio Options", items = {
+					{name = "Mute Audio" },
+					{name = "Rate Control Delta" },
+					{name = "Volume Level" },
+				} },
+				{ name = "Input Options" },
+				{ name = "Path Options" },
+				{ name = "Rewind" },
+				{ name = "Rewind Granularity" },
+				{ name = "GPU Screenshots" },
+				{ name = "Config Save On Exit" },
+				{ name = "Per-Core Configs" },
 			},
 		},
 		{
 			name = "SEGA MasterSystem",
-			icon = love.graphics.newImage("mastersystem.png"),
-			a = 128,
-			z = C_PASSIVE_ZOOM,
-			active_item = 1,
+			prefix = "mastersystem",
 			items = {
-				{ name = "Sonic Chaos", icon = love.graphics.newImage("mastersystem-cartidge.png"), a = 0, z = I_ACTIVE_ZOOM,  y = VSPACING*2.35, r = 0, v = 0 },
-				{ name = "Zool",        icon = love.graphics.newImage("mastersystem-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*4   , r = 0, v = 0 },
+				{ name = "Sonic Chaos" },
+				{ name = "Zool" },
 			},
 		},
 		{
 			name = "Nintendo Entertainment System",
-			icon = love.graphics.newImage("nes.png"),
-			a = 128,
-			z = C_PASSIVE_ZOOM,
-			active_item = 1,
+			prefix = "nes",
 			items = {
-				{ name = "Mario Bros.", icon = love.graphics.newImage("nes-cartidge.png"), a = 0, z = I_ACTIVE_ZOOM,  y = VSPACING*2.35, r = 0, v = 0 },
-				{ name = "Mario Bros.", icon = love.graphics.newImage("nes-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*4   , r = 0, v = 0 },
-				{ name = "Mario Bros.", icon = love.graphics.newImage("nes-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*5   , r = 0, v = 0 },
+				{ name = "Mario Bros." },
+				{ name = "Mario Bros." },
+				{ name = "Mario Bros." },
 			},
 		},
 		{
 			name = "SEGA Megadrive",
-			icon = love.graphics.newImage("megadrive.png"),
-			lib = '/usr/lib/libretro/libretro-genplus.so',
-			a = 128,
-			z = C_PASSIVE_ZOOM,
-			active_item = 1,
+			prefix = "megadrive",
 			items = {
-				{ name = "Sonic 2", icon = love.graphics.newImage("megadrive-cartidge.png"), a = 0, z = I_ACTIVE_ZOOM,  y = VSPACING*2.35, r = 0, v = 0 },
-				{ name = "Sonic 3", icon = love.graphics.newImage("megadrive-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*4   , r = 0, v = 0},
+				{ name = "Sonic 2" },
+				{ name = "Sonic 3" },
 			},
 		},
 		{
 			name = "GameBoy",
-			icon = love.graphics.newImage("gb.png"),
-			a = 128,
-			z = C_PASSIVE_ZOOM,
-			active_item = 1,
+			prefix = "gb",
 			items = {
-				{ name = "Pokemon Jaune", icon = love.graphics.newImage("gb-cartidge.png"), a = 0, z = I_ACTIVE_ZOOM,  y = VSPACING*2.35, r = 0, v = 0 },
-				{ name = "Pokemon Rouge", icon = love.graphics.newImage("gb-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*4   , r = 0, v = 0 },
+				{ name = "Pokemon Jaune" },
+				{ name = "Pokemon Rouge" },
 			},
 		},
 		{
 			name = "Super Nintendo",
-			icon = love.graphics.newImage("snes.png"),
-			lib = '/usr/lib/libretro/libretro-snes9x-next.so',
-			a = 128,
-			z = C_PASSIVE_ZOOM,
-			active_item = 1,
+			prefix = "snes",
 			items = {
-				{ name = "Super Bomberman",     icon = love.graphics.newImage("snes-cartidge.png"), a = 0, z = I_ACTIVE_ZOOM,  y = VSPACING*2.35, r = 0, v = 0},
-				{ name = "Secret of Mana",      icon = love.graphics.newImage("snes-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*4   , r = 0, v = 0},
-				{ name = "Super Metroid",       icon = love.graphics.newImage("snes-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*5   , r = 0, v = 0},
-				{ name = "The Legend of Zelda", icon = love.graphics.newImage("snes-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*6   , r = 0, v = 0},
-				{ name = "Tactics Ogre",        icon = love.graphics.newImage("snes-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*7   , r = 0, v = 0},
+				{ name = "Super Bomberman" },
+				{ name = "Secret of Mana" },
+				{ name = "Super Metroid" },
+				{ name = "The Legend of Zelda" },
+				{ name = "Tactics Ogre" },
 			},
 		},
 		{
 			name = "Playstation",
-			icon = love.graphics.newImage("ps1.png"),
-			a = 128,
-			z = C_PASSIVE_ZOOM,
-			active_item = 1,
+			prefix = "ps1",
 			items = {
-				{ name = "Crash Bandicoot",   icon = love.graphics.newImage("ps1-cd.png"), a = 0, z = I_ACTIVE_ZOOM,  y = VSPACING*2.35, r = 0, v = 0 },
-				{ name = "Final Fantasy VII", icon = love.graphics.newImage("ps1-cd.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*4   , r = 0, v = 0 },
-				{ name = "Xenogears",         icon = love.graphics.newImage("ps1-cd.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*5   , r = 0, v = 0 },
-				{ name = "Suikoden 2",        icon = love.graphics.newImage("ps1-cd.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*6   , r = 0, v = 0 },
-				{ name = "Suikoden 2",        icon = love.graphics.newImage("ps1-cd.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*7   , r = 0, v = 0 },
+				{ name = "Crash Bandicoot" },
+				{ name = "Final Fantasy VII" },
+				{ name = "Xenogears" },
+				{ name = "Suikoden 2" },
+				{ name = "Suikoden 2" },
 			},
 		},
 		{
 			name = "GameBoy Color",
-			icon = love.graphics.newImage("gbcolor.png"),
-			a = 128,
-			z = C_PASSIVE_ZOOM,
-			active_item = 1,
+			prefix = "gbcolor",
 			items = {
-				{ name = "Pokemon Or",           icon = love.graphics.newImage("gbcolor-cartidge.png"), a = 0, z = I_ACTIVE_ZOOM,  y = VSPACING*2.35, r = 0, v = 0 },
-				{ name = "New Super Mario Bros", icon = love.graphics.newImage("gbcolor-cartidge.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*4   , r = 0, v = 0 },
+				{ name = "Pokemon Or" },
+				{ name = "New Super Mario Bros" },
 			},
 		},
 		{
 			name = "NeoGeo",
-			icon = love.graphics.newImage("neogeo.png"),
-			a = 128,
-			z = C_PASSIVE_ZOOM,
-			active_item = 1,
+			prefix = "neogeo",
 			items = {
-				{ name = "Metal Slug",   icon = love.graphics.newImage("neogeo-cd.png"), a = 0, z = I_ACTIVE_ZOOM,  y = VSPACING*2.35, r = 0, v = 0 },
-				{ name = "Metal Slug 2", icon = love.graphics.newImage("neogeo-cd.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*4   , r = 0, v = 0 },
-				{ name = "Metal Slug 3", icon = love.graphics.newImage("neogeo-cd.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*5   , r = 0, v = 0 },
-				{ name = "Metal Slug 4", icon = love.graphics.newImage("neogeo-cd.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*6   , r = 0, v = 0 },
-				{ name = "Metal Slug 5", icon = love.graphics.newImage("neogeo-cd.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*7   , r = 0, v = 0 },
-				{ name = "Metal Slug X", icon = love.graphics.newImage("neogeo-cd.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*8   , r = 0, v = 0 },
-				{ name = "Bomberman",    icon = love.graphics.newImage("neogeo-cd.png"), a = 0, z = I_PASSIVE_ZOOM, y = VSPACING*9   , r = 0, v = 0 },
+				{ name = "Metal Slug" },
+				{ name = "Metal Slug 2" },
+				{ name = "Metal Slug 3" },
+				{ name = "Metal Slug 4" },
+				{ name = "Metal Slug 5" },
+				{ name = "Metal Slug X" },
+				{ name = "Bomberman" },
 			},
 		},
 		{
 			name = "Cave Story",
-			icon = love.graphics.newImage("cavestory.png"),
-			a = 128,
-			z = C_PASSIVE_ZOOM,
-			active_item = 1,
-			items = {
-			},
+			prefix = "cavestory",
 		},
 	}
 
 	-- wallpaper = love.graphics.newImage("wallpaper.png")
 
 	active_category = 1
+
+	depth = 0
 
 	t1 = 0
 	all_categories = { x = 0 } -- global x for all categories
@@ -157,6 +135,60 @@ function love.load()
 
 	overlay = { a = 255 }
 	tween(1, overlay, { a = 0 }, 'inOutQuad')
+
+	for i,category in ipairs(categories) do
+		category.a = i == active_category and 255 or 128
+		category.z = i == active_category and C_ACTIVE_ZOOM or C_PASSIVE_ZOOM
+		category.active_item = 1
+		category.icon = love.graphics.newImage(category.prefix .. ".png")
+		if not category.items then category.items = {} end
+
+		for j,item in ipairs(category.items) do
+			item.icon = love.graphics.newImage(category.prefix .. "-item.png")
+			if i == active_category and j == category.active_item then
+				item.a = 255
+				item.z = I_ACTIVE_ZOOM
+			elseif i == active_category and j ~= category.active_item then
+				item.a = 128
+				item.z = I_PASSIVE_ZOOM
+			else
+				item.a = 0
+				item.z = I_PASSIVE_ZOOM
+			end
+			if j == 1 then
+				item.y = VSPACING*2.35
+			else
+				item.y = VSPACING*(j+2)
+			end
+			item.r = 0
+			item.v = 0
+			item.active_subitem = 1
+			if not item.items then item.items = {} end
+
+			if category.prefix ~= "settings" then
+				item.items = {
+					{name = "Resume Content" },
+					{name = "Save State" },
+					{name = "Load State" },
+					{name = "Take Screenshot" },
+					{name = "Restart Content" },
+				}
+			end
+
+			for k,subitem in ipairs(item.items) do
+				subitem.icon = love.graphics.newImage("subsetting.png")
+				subitem.a = 0
+				subitem.r = 0
+				subitem.v = 0
+				subitem.z = k == item.active_subitem and I_ACTIVE_ZOOM or I_PASSIVE_ZOOM
+				if k == 1 then
+					subitem.y = VSPACING*2.35
+				else
+					subitem.y = VSPACING*(k+2)
+				end
+			end
+		end
+	end
 end
 
 -- Move the categories left or right depending on the active_category var
@@ -220,31 +252,99 @@ function switch_items ()
 	end
 end
 
+function open_submenu ()
+
+	-- move all categories
+	tween(0.25, all_categories, { x = -HSPACING * (active_category) }, 'inOutQuad')
+
+	for i, category in ipairs(categories) do
+		if i == active_category then
+			tween(0.25, category, { a = 255 }, 'inOutQuad')
+			for j, item in ipairs(category.items) do
+				if j == category.active_item then
+					for k, subitem in ipairs(item.items) do
+						if k == item.active_subitem then
+							tween(0.25, subitem, { a = 255 }, 'inOutQuad')
+							tween(0.25, subitem, { z = I_ACTIVE_ZOOM }, 'outBack')
+						else
+							tween(0.25, subitem, { a = 128 }, 'inOutQuad')
+							tween(0.25, subitem, { z = I_PASSIVE_ZOOM }, 'outBack')
+						end
+					end
+				else
+					tween(0.25, item, { a = 0 }, 'inOutQuad')
+				end
+			end
+		else
+			tween(0.25, category, { a = 0 }, 'inOutQuad')
+		end
+	end
+end
+
+function close_submenu ()
+
+	-- move all categories
+	tween(0.25, all_categories, { x = -HSPACING * (active_category-1) }, 'inOutQuad')
+
+	-- tween transparency
+	for i, category in ipairs(categories) do
+		if i == active_category then
+			tween(0.25, category, { a = 255 }, 'inOutQuad')
+			tween(0.25, category, { z = C_ACTIVE_ZOOM }, 'outBack')
+			for j, item in ipairs(category.items) do
+				if j == category.active_item then
+					tween(0.25, item, { a = 255 }, 'inOutQuad')
+					for k, subitem in ipairs(item.items) do
+						tween(0.25, subitem, { a = 0 }, 'inOutQuad')
+					end
+				else
+					tween(0.25, item, { a = 128 }, 'inOutQuad')
+				end
+			end
+		else
+			tween(0.25, category, { a = 128 }, 'inOutQuad')
+			tween(0.25, category, { z = C_PASSIVE_ZOOM }, 'outBack')
+			for j, item in ipairs(category.items) do
+				tween(0.25, item, { a = 0 }, 'inOutQuad')
+			end
+		end
+	end
+end
+
 function love.update(dt)
 	-- handle category switch
-	if love.keyboard.isDown("right") and love.timer.getTime() > t1 + 0.3 and active_category < table.getn(categories) then
+	if depth == 0 and love.keyboard.isDown("right") and love.timer.getTime() > t1 + 0.3 and active_category < table.getn(categories) then
 		t1 = love.timer.getTime()
 		active_category = active_category + 1
 		switch_categories()
 	end
-	if love.keyboard.isDown("left") and love.timer.getTime() > t1 + 0.3 and active_category > 1 then
+	if depth == 0 and love.keyboard.isDown("left") and love.timer.getTime() > t1 + 0.3 and active_category > 1 then
 		t1 = love.timer.getTime()
 		active_category = active_category - 1
 		switch_categories()
 	end
 
 	-- handle item switch
-	if love.keyboard.isDown("down") and love.timer.getTime() > t1 + 0.15 and categories[active_category].active_item < table.getn(categories[active_category].items) then
+	if depth == 0 and love.keyboard.isDown("down") and love.timer.getTime() > t1 + 0.15 and categories[active_category].active_item < table.getn(categories[active_category].items) then
 		t1 = love.timer.getTime()
 		categories[active_category].active_item = categories[active_category].active_item + 1
 		switch_items()
 	end
-	if love.keyboard.isDown("up") and love.timer.getTime() > t1 + 0.15 and categories[active_category].active_item > 1 then
+	if depth == 0 and love.keyboard.isDown("up") and love.timer.getTime() > t1 + 0.15 and categories[active_category].active_item > 1 then
 		t1 = love.timer.getTime()
 		categories[active_category].active_item = categories[active_category].active_item - 1
 		switch_items()
 	end
 
+	if love.keyboard.isDown(" ") and depth == 0 then
+		open_submenu()
+		depth = 1
+	end
+
+	if love.keyboard.isDown("backspace") and depth == 1 then
+		close_submenu()
+		depth = 0
+	end
 
 	for i, category in ipairs(categories) do
 		for j, item in ipairs(category.items) do
@@ -304,6 +404,14 @@ function love.draw()
 			else
 				love.graphics.draw( item.icon, 156 + (HSPACING*i) + all_categories.x, 300 + item.y - 25, item.r, item.z, item.z, 192/2, 192/2)
 			end
+
+			for k, subitem in ipairs(item.items) do
+				love.graphics.setColor(236, 240, 241, subitem.a)
+				love.graphics.draw( subitem.icon, 156 + (HSPACING*(i+1)) + all_categories.x, 300 + subitem.y - 25, subitem.r, subitem.z, subitem.z, 192/2, 192/2)
+				love.graphics.print(subitem.name, 256 + (HSPACING*(i+1)) + all_categories.x, 300-15 + subitem.y - 25)
+				love.graphics.setColor(236, 240, 241, item.a)
+			end
+
 			love.graphics.print(item.name, 256 + (HSPACING*i) + all_categories.x, 300-15 + item.y - 25)
 		end
 
