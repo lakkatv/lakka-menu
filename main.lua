@@ -21,19 +21,64 @@ function love.load()
 			name = "Settings",
 			prefix = "settings",
 			items = {
-				{ name = "Video Options" },
+				{ name = "Video Options", items = {
+					{name = "Shader Options" },
+					{name = "Integer Scale" },
+					{name = "Aspect Ratio" },
+					{name = "Custom Ratio" },
+					{name = "Toggle Fullscreen" },
+					{name = "Rotation" },
+					{name = "VSync" },
+					{name = "Hard GPU Sync" },
+					{name = "Hard GPU Sync Frames" },
+					{name = "Black Frame Insertion" },
+					{name = "VSync Swap Interval" },
+					{name = "Threader Driver" },
+					{name = "Windowed Scale (X)" },
+					{name = "Windowed Scale (Y)" },
+					{name = "Crop Overscan (reload)" },
+					{name = "Estimated Monitor FPS" },
+				} },
 				{ name = "Audio Options", items = {
 					{name = "Mute Audio" },
 					{name = "Rate Control Delta" },
 					{name = "Volume Level" },
 				} },
-				{ name = "Input Options" },
-				{ name = "Path Options" },
+				{ name = "Input Options", items = {
+					{name = "Overlay Preset" },
+					{name = "Overlay Opacity" },
+					{name = "Overlay Scale" },
+					{name = "Player" },
+					{name = "Device" },
+					{name = "Device Type" },
+					{name = "Analog D-pad Mode" },
+					{name = "Autodetect enable" },
+					{name = "Configure All (RetroPad)" },
+					{name = "Default All (RetroPad)" },
+					{name = "RGUI Menu Toggle" },
+					{name = "B Button (down)" },
+					{name = "Y Button (left)" },
+					{name = "..." },
+				} },
+				{ name = "Path Options", items = {
+					{name = "Content Directory" },
+					{name = "Config Directory" },
+					{name = "Core Directory" },
+					{name = "Core Info Directory" },
+					{name = "Shader Directory" },
+					{name = "Savestate Directory" },
+					{name = "Savefile Directory" },
+					{name = "Overlay Directory" },
+					{name = "System Directory" },
+					{name = "Screenshot Directory" },
+				} },
 				{ name = "Rewind" },
 				{ name = "Rewind Granularity" },
 				{ name = "GPU Screenshots" },
 				{ name = "Config Save On Exit" },
 				{ name = "Per-Core Configs" },
+				{ name = "SRAM Autosave" },
+				{ name = "Show Framerate" },
 			},
 		},
 		{
@@ -134,7 +179,7 @@ function love.load()
 	--img_background = love.graphics.newImage("bg.png")
 
 	overlay = { a = 255 }
-	tween(1, overlay, { a = 0 }, 'inOutQuad')
+	tween(1, overlay, { a = 0 }, 'outSine')
 
 	for i,category in ipairs(categories) do
 		category.a = i == active_category and 255 or 128
@@ -147,18 +192,17 @@ function love.load()
 			item.icon = love.graphics.newImage(category.prefix .. "-item.png")
 			if i == active_category and j == category.active_item then
 				item.a = 255
-				item.z = I_ACTIVE_ZOOM
 			elseif i == active_category and j ~= category.active_item then
 				item.a = 128
-				item.z = I_PASSIVE_ZOOM
 			else
 				item.a = 0
-				item.z = I_PASSIVE_ZOOM
 			end
 			if j == 1 then
 				item.y = VSPACING*2.35
+				item.z = I_ACTIVE_ZOOM
 			else
 				item.y = VSPACING*(j+2)
+				item.z = I_PASSIVE_ZOOM
 			end
 			item.r = 0
 			item.v = 0
@@ -177,6 +221,13 @@ function love.load()
 
 			for k,subitem in ipairs(item.items) do
 				subitem.icon = love.graphics.newImage("subsetting.png")
+				if category.prefix ~= "settings" then
+					if k == 1 then subitem.icon = love.graphics.newImage("play-pause.png") end
+					if k == 2 then subitem.icon = love.graphics.newImage("savestate.png") end
+					if k == 3 then subitem.icon = love.graphics.newImage("loadstate.png") end
+					if k == 4 then subitem.icon = love.graphics.newImage("screenshot.png") end
+					if k == 5 then subitem.icon = love.graphics.newImage("reload.png") end
+				end
 				subitem.a = 0
 				subitem.r = 0
 				subitem.v = 0
@@ -197,30 +248,32 @@ function switch_categories()
 	love.audio.play(snd_switch)
 
 	-- move all categories
-	tween(0.25, all_categories, { x = -HSPACING * (active_category-1) }, 'inOutQuad')
+	tween(0.25, all_categories, { x = -HSPACING * (active_category-1) }, 'outSine')
 
 	-- tween transparency
 	for i, category in ipairs(categories) do
 		if i == active_category then
-			tween(0.25, category, { a = 255 }, 'inOutQuad')
+			tween(0.25, category, { a = 255 }, 'outSine')
 			tween(0.25, category, { z = C_ACTIVE_ZOOM }, 'outBack')
 			for j, item in ipairs(category.items) do
 				if j == category.active_item then
-					tween(0.25, item, { a = 255 }, 'inOutQuad')
+					tween(0.25, item, { a = 255 }, 'outSine')
+					tween(0.25, item, { z = I_ACTIVE_ZOOM }, 'outSine')
 				else
-					tween(0.25, item, { a = 128 }, 'inOutQuad')
+					tween(0.25, item, { a = 128 }, 'outSine')
+					tween(0.25, item, { z = I_PASSIVE_ZOOM }, 'outSine')
 				end
 			end
 		else
-			tween(0.25, category, { a = 128 }, 'inOutQuad')
+			tween(0.25, category, { a = 128 }, 'outSine')
 			tween(0.25, category, { z = C_PASSIVE_ZOOM }, 'outBack')
 			for j, item in ipairs(category.items) do
-				tween(0.25, item, { a = 0 }, 'inOutQuad')
+				tween(0.25, item, { a = 0 }, 'outSine')
 			end
 		end
 	end
 
-	--tween(0.25, obj_background, { x = -100 * (active_category-1) }, 'inOutQuad')
+	--tween(0.25, obj_background, { x = -100 * (active_category-1) }, 'outSine')
 end
 
 -- Move the items of the active category up or down
@@ -229,25 +282,46 @@ function switch_items ()
 	love.audio.play(snd_switch)
 
 	for y, item in ipairs(categories[active_category].items) do
-		if y == categories[active_category].active_item and item.bg then
-			wallpaper = item.bg
-		end
-
 		-- Above items
 		if y < categories[active_category].active_item  then
-			tween(0.25, item, { a = 128 }, 'inOutQuad')
-			tween(0.25, item, { y = VSPACING*(y-categories[active_category].active_item)}, 'inOutQuad')
+			tween(0.25, item, { a = 128 }, 'outSine')
+			tween(0.25, item, { y = VSPACING*(y-categories[active_category].active_item)}, 'outSine')
 			tween(0.25, item, { z = I_PASSIVE_ZOOM }, 'outBack')
 		-- Active item
 		elseif y == categories[active_category].active_item then
-			tween(0.25, item, { a = 255 }, 'inOutQuad')
-			tween(0.25, item, { y = VSPACING*2.35}, 'inOutQuad')
+			tween(0.25, item, { a = 255 }, 'outSine')
+			tween(0.25, item, { y = VSPACING*2.35}, 'outSine')
 			tween(0.25, item, { z = I_ACTIVE_ZOOM }, 'outBack')
 		-- Under items
 		elseif y > categories[active_category].active_item then
-			tween(0.25, item, { a = 128 }, 'inOutQuad')
-			tween(0.25, item, { y = VSPACING*(y-categories[active_category].active_item + 3)}, 'inOutQuad')
+			tween(0.25, item, { a = 128 }, 'outSine')
+			tween(0.25, item, { y = VSPACING*(y-categories[active_category].active_item + 3)}, 'outSine')
 			tween(0.25, item, { z = I_PASSIVE_ZOOM }, 'outBack')
+		end
+	end
+end
+
+-- Move the items of the active category up or down
+function switch_subitems ()
+
+	love.audio.play(snd_switch)
+
+	for k, subitem in ipairs(categories[active_category].items[categories[active_category].active_item].items) do
+		-- Above items
+		if k < categories[active_category].items[categories[active_category].active_item].active_subitem then
+			tween(0.25, subitem, { a = 128 }, 'outSine')
+			tween(0.25, subitem, { y = VSPACING*(k-categories[active_category].items[categories[active_category].active_item].active_subitem + 2)}, 'outSine')
+			tween(0.25, subitem, { z = I_PASSIVE_ZOOM }, 'outBack')
+		-- Active item
+		elseif k == categories[active_category].items[categories[active_category].active_item].active_subitem then
+			tween(0.25, subitem, { a = 255 }, 'outSine')
+			tween(0.25, subitem, { y = VSPACING*2.35}, 'outSine')
+			tween(0.25, subitem, { z = I_ACTIVE_ZOOM }, 'outBack')
+		-- Under items
+		elseif k > categories[active_category].items[categories[active_category].active_item].active_subitem then
+			tween(0.25, subitem, { a = 128 }, 'outSine')
+			tween(0.25, subitem, { y = VSPACING*(k-categories[active_category].items[categories[active_category].active_item].active_subitem + 3)}, 'outSine')
+			tween(0.25, subitem, { z = I_PASSIVE_ZOOM }, 'outBack')
 		end
 	end
 end
@@ -255,28 +329,28 @@ end
 function open_submenu ()
 
 	-- move all categories
-	tween(0.25, all_categories, { x = -HSPACING * (active_category) }, 'inOutQuad')
+	tween(0.25, all_categories, { x = -HSPACING * (active_category) }, 'outSine')
 
 	for i, category in ipairs(categories) do
 		if i == active_category then
-			tween(0.25, category, { a = 255 }, 'inOutQuad')
+			tween(0.25, category, { a = 255 }, 'outSine')
 			for j, item in ipairs(category.items) do
 				if j == category.active_item then
 					for k, subitem in ipairs(item.items) do
 						if k == item.active_subitem then
-							tween(0.25, subitem, { a = 255 }, 'inOutQuad')
+							tween(0.25, subitem, { a = 255 }, 'outSine')
 							tween(0.25, subitem, { z = I_ACTIVE_ZOOM }, 'outBack')
 						else
-							tween(0.25, subitem, { a = 128 }, 'inOutQuad')
+							tween(0.25, subitem, { a = 128 }, 'outSine')
 							tween(0.25, subitem, { z = I_PASSIVE_ZOOM }, 'outBack')
 						end
 					end
 				else
-					tween(0.25, item, { a = 0 }, 'inOutQuad')
+					tween(0.25, item, { a = 0 }, 'outSine')
 				end
 			end
 		else
-			tween(0.25, category, { a = 0 }, 'inOutQuad')
+			tween(0.25, category, { a = 0 }, 'outSine')
 		end
 	end
 end
@@ -284,28 +358,28 @@ end
 function close_submenu ()
 
 	-- move all categories
-	tween(0.25, all_categories, { x = -HSPACING * (active_category-1) }, 'inOutQuad')
+	tween(0.25, all_categories, { x = -HSPACING * (active_category-1) }, 'outSine')
 
 	-- tween transparency
 	for i, category in ipairs(categories) do
 		if i == active_category then
-			tween(0.25, category, { a = 255 }, 'inOutQuad')
+			tween(0.25, category, { a = 255 }, 'outSine')
 			tween(0.25, category, { z = C_ACTIVE_ZOOM }, 'outBack')
 			for j, item in ipairs(category.items) do
 				if j == category.active_item then
-					tween(0.25, item, { a = 255 }, 'inOutQuad')
+					tween(0.25, item, { a = 255 }, 'outSine')
 					for k, subitem in ipairs(item.items) do
-						tween(0.25, subitem, { a = 0 }, 'inOutQuad')
+						tween(0.25, subitem, { a = 0 }, 'outSine')
 					end
 				else
-					tween(0.25, item, { a = 128 }, 'inOutQuad')
+					tween(0.25, item, { a = 128 }, 'outSine')
 				end
 			end
 		else
-			tween(0.25, category, { a = 128 }, 'inOutQuad')
+			tween(0.25, category, { a = 128 }, 'outSine')
 			tween(0.25, category, { z = C_PASSIVE_ZOOM }, 'outBack')
 			for j, item in ipairs(category.items) do
-				tween(0.25, item, { a = 0 }, 'inOutQuad')
+				tween(0.25, item, { a = 0 }, 'outSine')
 			end
 		end
 	end
@@ -325,15 +399,27 @@ function love.update(dt)
 	end
 
 	-- handle item switch
-	if depth == 0 and love.keyboard.isDown("down") and love.timer.getTime() > t1 + 0.15 and categories[active_category].active_item < table.getn(categories[active_category].items) then
+	if depth == 0 and love.keyboard.isDown("down") and love.timer.getTime() > t1 + 0.3 and categories[active_category].active_item < table.getn(categories[active_category].items) then
 		t1 = love.timer.getTime()
 		categories[active_category].active_item = categories[active_category].active_item + 1
 		switch_items()
 	end
-	if depth == 0 and love.keyboard.isDown("up") and love.timer.getTime() > t1 + 0.15 and categories[active_category].active_item > 1 then
+	if depth == 0 and love.keyboard.isDown("up") and love.timer.getTime() > t1 + 0.3 and categories[active_category].active_item > 1 then
 		t1 = love.timer.getTime()
 		categories[active_category].active_item = categories[active_category].active_item - 1
 		switch_items()
+	end
+
+	-- handle subitem switch
+	if depth == 1 and love.keyboard.isDown("down") and love.timer.getTime() > t1 + 0.3 and categories[active_category].items[categories[active_category].active_item].active_subitem < table.getn(categories[active_category].items[categories[active_category].active_item].items) then
+		t1 = love.timer.getTime()
+		categories[active_category].items[categories[active_category].active_item].active_subitem = categories[active_category].items[categories[active_category].active_item].active_subitem + 1
+		switch_subitems()
+	end
+	if depth == 1 and love.keyboard.isDown("up") and love.timer.getTime() > t1 + 0.3 and categories[active_category].items[categories[active_category].active_item].active_subitem > 1 then
+		t1 = love.timer.getTime()
+		categories[active_category].items[categories[active_category].active_item].active_subitem = categories[active_category].items[categories[active_category].active_item].active_subitem - 1
+		switch_subitems()
 	end
 
 	if love.keyboard.isDown(" ") and depth == 0 then
