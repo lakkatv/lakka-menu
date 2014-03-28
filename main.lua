@@ -10,7 +10,7 @@ function love.load()
 
 	WIDTH, HEIGHT = love.window.getDimensions()
 	HSPACING = 300 -- horizontal spacing between 2 categories
-	VSPACING = 100 -- vertical spacing between 2 items
+	VSPACING = 75 -- vertical spacing between 2 items
 	C_ACTIVE_ZOOM = 1
 	C_PASSIVE_ZOOM = 0.5
 	I_ACTIVE_ZOOM = 0.75
@@ -112,6 +112,9 @@ function love.load()
 			items = {
 				{ name = "Pokemon Jaune" },
 				{ name = "Pokemon Rouge" },
+				{ name = "Pokemon Bleu" },
+				{ name = "Pokemon Vert" },
+				{ name = "Kirby" },
 			},
 		},
 		{
@@ -178,6 +181,8 @@ function love.load()
 	snd_switch = love.audio.newSource("switch.wav", "static")
 	--img_background = love.graphics.newImage("bg.png")
 
+	arrow = love.graphics.newImage("arrow.png")
+
 	overlay = { a = 255 }
 	tween(1, overlay, { a = 0 }, 'outSine')
 
@@ -198,7 +203,7 @@ function love.load()
 				item.a = 0
 			end
 			if j == 1 then
-				item.y = VSPACING*2.35
+				item.y = VSPACING*2.5
 				item.z = I_ACTIVE_ZOOM
 			else
 				item.y = VSPACING*(j+2)
@@ -233,7 +238,7 @@ function love.load()
 				subitem.v = 0
 				subitem.z = k == item.active_subitem and I_ACTIVE_ZOOM or I_PASSIVE_ZOOM
 				if k == 1 then
-					subitem.y = VSPACING*2.35
+					subitem.y = VSPACING*2.5
 				else
 					subitem.y = VSPACING*(k+2)
 				end
@@ -285,12 +290,12 @@ function switch_items ()
 		-- Above items
 		if y < categories[active_category].active_item  then
 			tween(0.25, item, { a = 128 }, 'outSine')
-			tween(0.25, item, { y = VSPACING*(y-categories[active_category].active_item)}, 'outSine')
+			tween(0.25, item, { y = VSPACING*(y-categories[active_category].active_item - 1)}, 'outSine')
 			tween(0.25, item, { z = I_PASSIVE_ZOOM }, 'outBack')
 		-- Active item
 		elseif y == categories[active_category].active_item then
 			tween(0.25, item, { a = 255 }, 'outSine')
-			tween(0.25, item, { y = VSPACING*2.35}, 'outSine')
+			tween(0.25, item, { y = VSPACING*2.5}, 'outSine')
 			tween(0.25, item, { z = I_ACTIVE_ZOOM }, 'outBack')
 		-- Under items
 		elseif y > categories[active_category].active_item then
@@ -315,7 +320,7 @@ function switch_subitems ()
 		-- Active item
 		elseif k == categories[active_category].items[categories[active_category].active_item].active_subitem then
 			tween(0.25, subitem, { a = 255 }, 'outSine')
-			tween(0.25, subitem, { y = VSPACING*2.35}, 'outSine')
+			tween(0.25, subitem, { y = VSPACING*2.5}, 'outSine')
 			tween(0.25, subitem, { z = I_ACTIVE_ZOOM }, 'outBack')
 		-- Under items
 		elseif k > categories[active_category].items[categories[active_category].active_item].active_subitem then
@@ -327,6 +332,8 @@ function switch_subitems ()
 end
 
 function open_submenu ()
+
+	love.audio.play(snd_switch)
 
 	-- move all categories
 	tween(0.25, all_categories, { x = -HSPACING * (active_category) }, 'outSine')
@@ -356,6 +363,8 @@ function open_submenu ()
 end
 
 function close_submenu ()
+
+	love.audio.play(snd_switch)
 
 	-- move all categories
 	tween(0.25, all_categories, { x = -HSPACING * (active_category-1) }, 'outSine')
@@ -432,33 +441,7 @@ function love.update(dt)
 		depth = 0
 	end
 
-	for i, category in ipairs(categories) do
-		for j, item in ipairs(category.items) do
-			if i == 7 and i == active_category and j == category.active_item then
-				item.v = item.v + (math.pi/1024)
-				rotation_speed(item, dt)
-			else
-				item.v = item.v - (math.pi/1024)
-				rotation_speed(item, dt)
-			end
-		end
-	end
-
 	tween.update(dt)
-end
-
-function rotation_speed(item, dt)
-	if item.v > math.pi/4 then
-		item.v = math.pi/4
-	elseif item.v < 0 then
-		item.v = 0
-	end
-
-	item.r = item.r + item.v
-
-	if item.r >= math.pi*2 then
-		item.r = 0
-	end
 end
 
 function love.draw()
@@ -470,45 +453,40 @@ function love.draw()
 
 	-- Print category name
 	love.graphics.setColor(236, 240, 241)
-	love.graphics.print(categories[active_category].name, 10, 10)
+	if depth == 0 then
+		love.graphics.print(categories[active_category].name, 10, 10)
+	else
+		love.graphics.print(categories[active_category].items[categories[active_category].active_item].name, 10, 10)
+	end
 	-- Print the current date
 	love.graphics.printf(os.date("%x %H:%M", os.time()), 0, 10, WIDTH-10, 'right')
 
 	-- Draw categories and items
 	for i, category in ipairs(categories) do
 
-		-- rotate the settings icon if active
-		if active_category == 1 then
-			r = r + 0.0025
-		end
-
 		-- Draw items
 		for j, item in ipairs(category.items) do
 			love.graphics.setColor(236, 240, 241, item.a) -- set item transparency
-			if i == 1 and j == category.active_item then
-				love.graphics.draw( item.icon, 156 + (HSPACING*i) + all_categories.x, 300 + item.y - 25, -r, item.z, item.z, 192/2, 192/2)
-			else
-				love.graphics.draw( item.icon, 156 + (HSPACING*i) + all_categories.x, 300 + item.y - 25, item.r, item.z, item.z, 192/2, 192/2)
-			end
+			love.graphics.draw( item.icon, 156 + (HSPACING*i) + all_categories.x, 300 + item.y, item.r, item.z, item.z, 192/2, 192/2)
 
 			for k, subitem in ipairs(item.items) do
 				love.graphics.setColor(236, 240, 241, subitem.a)
-				love.graphics.draw( subitem.icon, 156 + (HSPACING*(i+1)) + all_categories.x, 300 + subitem.y - 25, subitem.r, subitem.z, subitem.z, 192/2, 192/2)
-				love.graphics.print(subitem.name, 256 + (HSPACING*(i+1)) + all_categories.x, 300-15 + subitem.y - 25)
+				love.graphics.draw( subitem.icon, 156 + (HSPACING*(i+1)) + all_categories.x, 300 + subitem.y, subitem.r, subitem.z, subitem.z, 192/2, 192/2)
+				love.graphics.print(subitem.name, 256 + (HSPACING*(i+1)) + all_categories.x, 300-15 + subitem.y)
 				love.graphics.setColor(236, 240, 241, item.a)
 			end
 
-			love.graphics.print(item.name, 256 + (HSPACING*i) + all_categories.x, 300-15 + item.y - 25)
+			if depth == 0 then
+				love.graphics.print(item.name, 256 + (HSPACING*i) + all_categories.x, 300-15 + item.y)
+			else
+				love.graphics.draw(arrow, 156 + (HSPACING*i) + all_categories.x + 150, 300 + item.y, item.r, item.z, item.z, 192/2, 192/2)
+			end
 		end
 
 		-- Draw category
 		love.graphics.setColor(255,255,255,category.a) -- set category transparency
-		if i == 1 then
-			love.graphics.draw(category.icon, 156 + (HSPACING*i) + all_categories.x, 300, r, category.z, category.z, 192/2, 192/2)
-		else
-			love.graphics.draw(category.icon, 156 + (HSPACING*i) + all_categories.x, 300, 0, category.z, category.z, 192/2, 192/2)
-		end
-		
+		love.graphics.draw(category.icon, 156 + (HSPACING*i) + all_categories.x, 300, 0, category.z, category.z, 192/2, 192/2)
+
 	end
 
 	-- Draw the black overlay that fade of during startup
