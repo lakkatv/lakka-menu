@@ -87,6 +87,8 @@ function love.load()
 			items = {
 				{ name = "Sonic Chaos" },
 				{ name = "Zool" },
+				{ name = "Wonderboy 3" },
+				{ name = "Alex kid" },
 			},
 		},
 		{
@@ -94,7 +96,7 @@ function love.load()
 			prefix = "nes",
 			items = {
 				{ name = "Mario Bros." },
-				{ name = "Mario Bros." },
+				{ name = "Final Fantasy 3" },
 				{ name = "Mario Bros." },
 			},
 		},
@@ -104,17 +106,21 @@ function love.load()
 			items = {
 				{ name = "Sonic 2" },
 				{ name = "Sonic 3" },
+				{ name = "Gunstar Heroes" },
+				{ name = "Piersolar" },
 			},
 		},
 		{
 			name = "GameBoy",
 			prefix = "gb",
 			items = {
+				{ name = "Tetris" },
 				{ name = "Pokemon Jaune" },
 				{ name = "Pokemon Rouge" },
 				{ name = "Pokemon Bleu" },
 				{ name = "Pokemon Vert" },
 				{ name = "Kirby" },
+				{ name = "Zelda" },
 			},
 		},
 		{
@@ -215,6 +221,7 @@ function love.load()
 			if not item.items then item.items = {} end
 
 			if category.prefix ~= "settings" then
+				item.slot = 0
 				item.items = {
 					{name = "Resume Content" },
 					{name = "Save State" },
@@ -286,21 +293,21 @@ function switch_items ()
 
 	love.audio.play(snd_switch)
 
-	for y, item in ipairs(categories[active_category].items) do
+	for j, item in ipairs(categories[active_category].items) do
 		-- Above items
-		if y < categories[active_category].active_item  then
+		if j < categories[active_category].active_item  then
 			tween(0.25, item, { a = 128 }, 'outSine')
-			tween(0.25, item, { y = VSPACING*(y-categories[active_category].active_item - 1)}, 'outSine')
+			tween(0.25, item, { y = VSPACING*(j-categories[active_category].active_item - 1)}, 'outSine')
 			tween(0.25, item, { z = I_PASSIVE_ZOOM }, 'outBack')
 		-- Active item
-		elseif y == categories[active_category].active_item then
+		elseif j == categories[active_category].active_item then
 			tween(0.25, item, { a = 255 }, 'outSine')
 			tween(0.25, item, { y = VSPACING*2.5}, 'outSine')
 			tween(0.25, item, { z = I_ACTIVE_ZOOM }, 'outBack')
 		-- Under items
-		elseif y > categories[active_category].active_item then
+		elseif j > categories[active_category].active_item then
 			tween(0.25, item, { a = 128 }, 'outSine')
-			tween(0.25, item, { y = VSPACING*(y-categories[active_category].active_item + 3)}, 'outSine')
+			tween(0.25, item, { y = VSPACING*(j-categories[active_category].active_item + 3)}, 'outSine')
 			tween(0.25, item, { z = I_PASSIVE_ZOOM }, 'outBack')
 		end
 	end
@@ -311,21 +318,24 @@ function switch_subitems ()
 
 	love.audio.play(snd_switch)
 
-	for k, subitem in ipairs(categories[active_category].items[categories[active_category].active_item].items) do
+	ac = categories[active_category]
+	ai = ac.items[ac.active_item]
+
+	for k, subitem in ipairs(ai.items) do
 		-- Above items
-		if k < categories[active_category].items[categories[active_category].active_item].active_subitem then
+		if k < ai.active_subitem then
 			tween(0.25, subitem, { a = 128 }, 'outSine')
-			tween(0.25, subitem, { y = VSPACING*(k-categories[active_category].items[categories[active_category].active_item].active_subitem + 2)}, 'outSine')
+			tween(0.25, subitem, { y = VSPACING*(k-ai.active_subitem + 2)}, 'outSine')
 			tween(0.25, subitem, { z = I_PASSIVE_ZOOM }, 'outBack')
 		-- Active item
-		elseif k == categories[active_category].items[categories[active_category].active_item].active_subitem then
+		elseif k == ai.active_subitem then
 			tween(0.25, subitem, { a = 255 }, 'outSine')
 			tween(0.25, subitem, { y = VSPACING*2.5}, 'outSine')
 			tween(0.25, subitem, { z = I_ACTIVE_ZOOM }, 'outBack')
 		-- Under items
-		elseif k > categories[active_category].items[categories[active_category].active_item].active_subitem then
+		elseif k > ai.active_subitem then
 			tween(0.25, subitem, { a = 128 }, 'outSine')
-			tween(0.25, subitem, { y = VSPACING*(k-categories[active_category].items[categories[active_category].active_item].active_subitem + 3)}, 'outSine')
+			tween(0.25, subitem, { y = VSPACING*(k-ai.active_subitem + 3)}, 'outSine')
 			tween(0.25, subitem, { z = I_PASSIVE_ZOOM }, 'outBack')
 		end
 	end
@@ -395,6 +405,9 @@ function close_submenu ()
 end
 
 function love.update(dt)
+	ac = categories[active_category]
+	ai = ac.items[ac.active_item]
+
 	-- handle category switch
 	if depth == 0 and love.keyboard.isDown("right") and love.timer.getTime() > t1 + 0.3 and active_category < table.getn(categories) then
 		t1 = love.timer.getTime()
@@ -408,27 +421,37 @@ function love.update(dt)
 	end
 
 	-- handle item switch
-	if depth == 0 and love.keyboard.isDown("down") and love.timer.getTime() > t1 + 0.3 and categories[active_category].active_item < table.getn(categories[active_category].items) then
+	if depth == 0 and love.keyboard.isDown("down") and love.timer.getTime() > t1 + 0.3 and ac.active_item < table.getn(ac.items) then
 		t1 = love.timer.getTime()
-		categories[active_category].active_item = categories[active_category].active_item + 1
+		ac.active_item = ac.active_item + 1
 		switch_items()
 	end
-	if depth == 0 and love.keyboard.isDown("up") and love.timer.getTime() > t1 + 0.3 and categories[active_category].active_item > 1 then
+	if depth == 0 and love.keyboard.isDown("up") and love.timer.getTime() > t1 + 0.3 and ac.active_item > 1 then
 		t1 = love.timer.getTime()
-		categories[active_category].active_item = categories[active_category].active_item - 1
+		ac.active_item = ac.active_item - 1
 		switch_items()
 	end
 
 	-- handle subitem switch
-	if depth == 1 and love.keyboard.isDown("down") and love.timer.getTime() > t1 + 0.3 and categories[active_category].items[categories[active_category].active_item].active_subitem < table.getn(categories[active_category].items[categories[active_category].active_item].items) then
+	if depth == 1 and love.keyboard.isDown("down") and love.timer.getTime() > t1 + 0.3 and ai.active_subitem < table.getn(ai.items) then
 		t1 = love.timer.getTime()
-		categories[active_category].items[categories[active_category].active_item].active_subitem = categories[active_category].items[categories[active_category].active_item].active_subitem + 1
+		ai.active_subitem = ai.active_subitem + 1
 		switch_subitems()
 	end
-	if depth == 1 and love.keyboard.isDown("up") and love.timer.getTime() > t1 + 0.3 and categories[active_category].items[categories[active_category].active_item].active_subitem > 1 then
+	if depth == 1 and love.keyboard.isDown("up") and love.timer.getTime() > t1 + 0.3 and ai.active_subitem > 1 then
 		t1 = love.timer.getTime()
-		categories[active_category].items[categories[active_category].active_item].active_subitem = categories[active_category].items[categories[active_category].active_item].active_subitem - 1
+		ai.active_subitem = ai.active_subitem - 1
 		switch_subitems()
+	end
+
+	-- handle slot switch
+	if depth == 1 and love.keyboard.isDown("right") and love.timer.getTime() > t1 + 0.3 and ac.prefix ~= "settings" and (ai.active_subitem == 2 or ai.active_subitem == 3) then
+		t1 = love.timer.getTime()
+		ai.slot = ai.slot + 1
+	end
+	if depth == 1 and love.keyboard.isDown("left") and love.timer.getTime() > t1 + 0.3 and ac.prefix ~= "settings" and (ai.active_subitem == 2 or ai.active_subitem == 3) and ai.slot > -1 then
+		t1 = love.timer.getTime()
+		ai.slot = ai.slot - 1
 	end
 
 	if love.keyboard.isDown(" ") and depth == 0 then
@@ -472,7 +495,13 @@ function love.draw()
 			for k, subitem in ipairs(item.items) do
 				love.graphics.setColor(236, 240, 241, subitem.a)
 				love.graphics.draw( subitem.icon, 156 + (HSPACING*(i+1)) + all_categories.x, 300 + subitem.y, subitem.r, subitem.z, subitem.z, 192/2, 192/2)
-				love.graphics.print(subitem.name, 256 + (HSPACING*(i+1)) + all_categories.x, 300-15 + subitem.y)
+				if category.prefix ~= "settings" and  (k == 2 or k == 3) and item.slot == -1 then
+					love.graphics.print(subitem.name .. " <" .. item.slot .. " (auto)>", 256 + (HSPACING*(i+1)) + all_categories.x, 300-15 + subitem.y)
+				elseif category.prefix ~= "settings" and  (k == 2 or k == 3) then
+					love.graphics.print(subitem.name .. " <" .. item.slot .. ">", 256 + (HSPACING*(i+1)) + all_categories.x, 300-15 + subitem.y)
+				else
+					love.graphics.print(subitem.name, 256 + (HSPACING*(i+1)) + all_categories.x, 300-15 + subitem.y)
+				end
 				love.graphics.setColor(236, 240, 241, item.a)
 			end
 
