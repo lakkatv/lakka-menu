@@ -101,6 +101,15 @@ function love.load()
 			},
 		},
 		{
+			name = "PC Engine",
+			prefix = "pce",
+			items = {
+				{ name = "Bonk 3" },
+				{ name = "Adventure Island" },
+				{ name = "Parodius" },
+			},
+		},
+		{
 			name = "SEGA Megadrive",
 			prefix = "megadrive",
 			items = {
