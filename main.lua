@@ -155,11 +155,28 @@ function love.load()
 			},
 		},
 		{
+			name = "Playstation",
+			prefix = "mupen64plus",
+			items = {
+				{ name = "Paper Mario" },
+				{ name = "Super Mario 64" },
+				{ name = "Pokemon Snap" },
+				{ name = "F Zero X" },
+			},
+		},
+		{
 			name = "GameBoy Color",
 			prefix = "gbcolor",
 			items = {
 				{ name = "Pokemon Or" },
 				{ name = "New Super Mario Bros" },
+			},
+		},
+		{
+			name = "GameBoy Advance",
+			prefix = "mednafen_gba",
+			items = {
+				{ name = "Final Fantasy Tactics Advance" },
 			},
 		},
 		{
@@ -178,6 +195,9 @@ function love.load()
 		{
 			name = "Cave Story",
 			prefix = "cavestory",
+			items = {
+				{ name = "Doukoutsu" },
+			},
 		},
 	}
 

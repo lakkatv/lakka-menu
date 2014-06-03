@@ -15,7 +15,10 @@
    inkscape:version="0.48.4 r9939"
    width="64"
    height="64"
-   sodipodi:docname="pcengine.svg">
+   sodipodi:docname="pce.svg"
+   inkscape:export-filename="/home/kivutar/Bureau/lakka-menu/pce.png"
+   inkscape:export-xdpi="270"
+   inkscape:export-ydpi="270">
   <metadata
      id="metadata3381">
     <rdf:RDF>
@@ -24,7 +27,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -39,16 +42,16 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1585"
-     inkscape:window-height="1013"
+     inkscape:window-width="1438"
+     inkscape:window-height="836"
      id="namedview3377"
      showgrid="true"
      inkscape:snap-from-guide="true"
      inkscape:snap-bbox="true"
      inkscape:zoom="11.313709"
-     inkscape:cx="33.951818"
+     inkscape:cx="34.128595"
      inkscape:cy="31.918149"
-     inkscape:window-x="3"
+     inkscape:window-x="0"
      inkscape:window-y="27"
      inkscape:window-maximized="0"
      inkscape:current-layer="layer2">

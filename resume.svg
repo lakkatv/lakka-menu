@@ -15,7 +15,7 @@
    version="1.1"
    inkscape:version="0.48.4 r9939"
    sodipodi:docname="resume.svg"
-   inkscape:export-filename="/home/kivutar/Bureau/lakka-menu/subsetting.png"
+   inkscape:export-filename="/home/kivutar/Bureau/lakka-menu/resume.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
@@ -28,8 +28,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="7.9195959"
-     inkscape:cx="126.7152"
-     inkscape:cy="100.90721"
+     inkscape:cx="108.88133"
+     inkscape:cy="89.282194"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -37,8 +37,7 @@
      inkscape:window-height="838"
      inkscape:window-x="0"
      inkscape:window-y="27"
-     inkscape:window-maximized="1"
-     inkscape:snap-bbox="true">
+     inkscape:window-maximized="1">
     <inkscape:grid
        type="xygrid"
        id="grid2985"
@@ -64,19 +63,16 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(0,-860.36218)">
-    <rect
-       style="fill:#ecf0f1;fill-opacity:1;stroke:none"
-       id="rect3008"
-       width="8.0000076"
-       height="40.000004"
-       x="740.13245"
-       y="600.36792"
-       ry="4"
-       transform="matrix(0.70710678,0.70710678,-0.70710678,0.70710678,0,0)" />
     <path
        style="fill:#ecf0f1;fill-opacity:1;stroke:none"
-       d="m 121.45585,930.90632 c -6.24839,-6.24838 -16.37903,-6.24839 -22.62742,0 -6.248392,6.24839 -6.248389,16.37903 -2e-6,22.62742 6.248392,6.24839 16.379032,6.24838 22.627422,0 6.24839,-6.24839 6.24838,-16.37903 0,-22.62742 z m -3.77124,3.77124 2.7695,10.31198 -7.54247,7.54246 -10.31198,-2.76949 -2.76949,-10.31198 7.54246,-7.54247 10.31198,2.7695 z"
-       id="path3010"
+       d="m 116,956.36218 -24,-24 0,48 z"
+       id="path2998"
        inkscape:connector-curvature="0" />
+    <path
+       style="fill:#ecf0f1;fill-opacity:1;stroke:none"
+       d="m 76,932.36218 8,0 0,48 -8,0 z"
+       id="rect3002"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc" />
   </g>
 </svg>
