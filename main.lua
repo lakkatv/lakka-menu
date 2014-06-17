@@ -82,6 +82,14 @@ function love.load()
 			},
 		},
 		{
+			name = "Atari2600",
+			prefix = "a26",
+			items = {
+				{ name = "Pac-Man" },
+				{ name = "Pengo" },
+			},
+		},
+		{
 			name = "DOSBox",
 			prefix = "dosbox",
 			items = {
