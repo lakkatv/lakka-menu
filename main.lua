@@ -152,6 +152,14 @@ function love.load()
 			},
 		},
 		{
+			name = "PC FX",
+			prefix = "pcfx",
+			items = {
+				{ name = "Cutie Honey FX" },
+				{ name = "Tenchi Muyo! Ryo-Ohki FX" },
+			},
+		},
+		{
 			name = "Playstation",
 			prefix = "ps1",
 			items = {
