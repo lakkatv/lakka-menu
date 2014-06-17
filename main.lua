@@ -82,6 +82,14 @@ function love.load()
 			},
 		},
 		{
+			name = "DOSBox",
+			prefix = "dosbox",
+			items = {
+				{ name = "JAZZ" },
+				{ name = "Jetpack" },
+			},
+		},
+		{
 			name = "SEGA MasterSystem",
 			prefix = "mastersystem",
 			items = {
