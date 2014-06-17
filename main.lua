@@ -199,6 +199,14 @@ function love.load()
 				{ name = "Doukoutsu" },
 			},
 		},
+				{
+			name = "NintendoDS",
+			prefix = "nds",
+			items = {
+				{ name = "Nintendogs" },
+				{ name = "Yoshi's Touch And Go" },
+			},
+		},
 	}
 
 	-- wallpaper = love.graphics.newImage("wallpaper.png")
