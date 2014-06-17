@@ -181,6 +181,14 @@ function love.load()
 			},
 		},
 		{
+			name = "NeoGeo Pocket",
+			prefix = "neogeopocket",
+			items = {
+				{ name = "Sonic Pocket Adventure" },
+				{ name = "Pocket Tennis" },
+			},
+		},
+		{
 			name = "GameBoy Color",
 			prefix = "gbcolor",
 			items = {
