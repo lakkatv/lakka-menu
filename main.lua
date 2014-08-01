@@ -2,11 +2,17 @@ tween = require 'tween'
 
 function love.load()
 
+	theme = 'flatui'
+	size = 192
+	repertory = 'retroarch-assets/lakka/'
+
+
 	love.mouse.setVisible(false)
 
-	love.graphics.setNewFont('JosefinSans-Bold.ttf', 30)
-	love.graphics.setColor(255,255,255)
-	love.graphics.setBackgroundColor(26, 188, 156)
+	love.graphics.setNewFont(repertory .. theme .. "/" .. "font.ttf", 30)
+	background = love.graphics.newImage(repertory .. theme .. "/" .. size .. "/" .. "bg.png")
+	--love.graphics.setColor(255,255,255)
+	--love.graphics.setBackgroundColor(26, 188, 156)
 
 	WIDTH, HEIGHT = love.window.getDimensions()
 	HSPACING = 300 -- horizontal spacing between 2 categories
@@ -83,23 +89,23 @@ function love.load()
 		},
 		{
 			name = "Atari2600",
-			prefix = "a26",
+			prefix = "Atari 2600",
 			items = {
 				{ name = "Pac-Man" },
 				{ name = "Pengo" },
 			},
 		},
 		{
-			name = "DOSBox",
-			prefix = "dosbox",
+			name = "Vectrex",
+			prefix = "Vectrex",
 			items = {
-				{ name = "JAZZ" },
-				{ name = "Jetpack" },
+				{ name = "Game 1" },
+				{ name = "Game 2" },
 			},
 		},
 		{
 			name = "SEGA MasterSystem",
-			prefix = "mastersystem",
+			prefix = "Master System",
 			items = {
 				{ name = "Sonic Chaos" },
 				{ name = "Zool" },
@@ -109,7 +115,7 @@ function love.load()
 		},
 		{
 			name = "Nintendo Entertainment System",
-			prefix = "nes",
+			prefix = "Nintendo Entertainment System",
 			items = {
 				{ name = "Mario Bros." },
 				{ name = "Final Fantasy 3" },
@@ -117,8 +123,16 @@ function love.load()
 			},
 		},
 		{
+			name = "DOSBox",
+			prefix = "DOS",
+			items = {
+				{ name = "JAZZ" },
+				{ name = "Jetpack" },
+			},
+		},
+		{
 			name = "PC Engine",
-			prefix = "pce",
+			prefix = "PC Engine PCE-CD",
 			items = {
 				{ name = "Bonk 3" },
 				{ name = "Adventure Island" },
@@ -127,7 +141,7 @@ function love.load()
 		},
 		{
 			name = "SEGA Megadrive",
-			prefix = "megadrive",
+			prefix = "Sega 8 16bit (Various)",
 			items = {
 				{ name = "Sonic 2" },
 				{ name = "Sonic 3" },
@@ -135,9 +149,66 @@ function love.load()
 				{ name = "Piersolar" },
 			},
 		},
+		--{
+		--	name = "PC Engine SuperGrafx",
+		--	prefix = "PC Engine SuperGrafx",
+		--	items = {
+		--		{ name = "Game 1" },
+		--		{ name = "Game 2" },
+		--		{ name = "Game 3" },
+		--	},
+		--},
+		{
+			name = "Super Nintendo",
+			prefix = "Super Nintendo Entertainment System",
+			items = {
+				{ name = "Super Bomberman" },
+				{ name = "Secret of Mana" },
+				{ name = "Super Metroid" },
+				{ name = "The Legend of Zelda" },
+				{ name = "Tactics Ogre" },
+			},
+		},
+		{
+			name = "Playstation",
+			prefix = "PlayStation",
+			items = {
+				{ name = "Crash Bandicoot" },
+				{ name = "Final Fantasy VII" },
+				{ name = "Xenogears" },
+				{ name = "Suikoden 2" },
+				{ name = "Suikoden 2" },
+			},
+		},
+		{
+			name = "PC-FX",
+			prefix = "PC-FX",
+			items = {
+				{ name = "Cutie Honey FX" },
+				{ name = "Tenchi Muyo! Ryo-Ohki FX" },
+			},
+		},
+		{
+			name = "Virtual Boy",
+			prefix = "Virtual Boy",
+			items = {
+				{ name = "Game 1" },
+				{ name = "Game 2" },
+				{ name = "Game 3" },
+			},
+		},
+		{
+			name = "Nintendo 64",
+			prefix = "Nintendo 64",
+			items = {
+				{ name = "Game 1" },
+				{ name = "Game 2" },
+				{ name = "Game 3" },
+			},
+		},
 		{
 			name = "GameBoy",
-			prefix = "gb",
+			prefix = "Game Boy",
 			items = {
 				{ name = "Tetris" },
 				{ name = "Pokemon Jaune" },
@@ -149,96 +220,125 @@ function love.load()
 			},
 		},
 		{
-			name = "Super Nintendo",
-			prefix = "snes",
+			name = "Atari Lynx",
+			prefix = "Atari Lynx",
 			items = {
-				{ name = "Super Bomberman" },
-				{ name = "Secret of Mana" },
-				{ name = "Super Metroid" },
-				{ name = "The Legend of Zelda" },
-				{ name = "Tactics Ogre" },
-			},
-		},
-		{
-			name = "PC FX",
-			prefix = "pcfx",
-			items = {
-				{ name = "Cutie Honey FX" },
-				{ name = "Tenchi Muyo! Ryo-Ohki FX" },
-			},
-		},
-		{
-			name = "Playstation",
-			prefix = "ps1",
-			items = {
-				{ name = "Crash Bandicoot" },
-				{ name = "Final Fantasy VII" },
-				{ name = "Xenogears" },
-				{ name = "Suikoden 2" },
-				{ name = "Suikoden 2" },
-			},
-		},
-		{
-			name = "Playstation",
-			prefix = "mupen64plus",
-			items = {
-				{ name = "Paper Mario" },
-				{ name = "Super Mario 64" },
-				{ name = "Pokemon Snap" },
-				{ name = "F Zero X" },
-			},
-		},
-		{
-			name = "NeoGeo Pocket",
-			prefix = "neogeopocket",
-			items = {
-				{ name = "Sonic Pocket Adventure" },
-				{ name = "Pocket Tennis" },
+				{ name = "Game 1" },
+				{ name = "Game 2" },
 			},
 		},
 		{
 			name = "GameBoy Color",
-			prefix = "gbcolor",
+			prefix = "Game Boy Color",
 			items = {
 				{ name = "Pokemon Or" },
 				{ name = "New Super Mario Bros" },
 			},
 		},
 		{
+			name = "NeoGeo Pocket",
+			prefix = "Neo Geo Pocket (Color)",
+			items = {
+				{ name = "Sonic Pocket Adventure" },
+				{ name = "Pocket Tennis" },
+			},
+		},
+		{
+			name = "WonderSwan Color",
+			prefix = "WonderSwan Color",
+			items = {
+				{ name = "Game 1" },
+				{ name = "Game 2" },
+			},
+		},
+		{
 			name = "GameBoy Advance",
-			prefix = "mednafen_gba",
+			prefix = "Game Boy Advance",
 			items = {
 				{ name = "Final Fantasy Tactics Advance" },
 			},
 		},
 		{
-			name = "NeoGeo",
-			prefix = "neogeo",
-			items = {
-				{ name = "Metal Slug" },
-				{ name = "Metal Slug 2" },
-				{ name = "Metal Slug 3" },
-				{ name = "Metal Slug 4" },
-				{ name = "Metal Slug 5" },
-				{ name = "Metal Slug X" },
-				{ name = "Bomberman" },
-			},
-		},
-		{
-			name = "Cave Story",
-			prefix = "cavestory",
-			items = {
-				{ name = "Doukoutsu" },
-			},
-		},
-				{
 			name = "NintendoDS",
-			prefix = "nds",
+			prefix = "Nintendo DS",
 			items = {
 				{ name = "Nintendogs" },
 				{ name = "Yoshi's Touch And Go" },
 			},
 		},
+		{
+			name = "Arcade FBA",
+			prefix = "Arcade (various)",
+			items = {
+				{ name = "Game 1" },
+				{ name = "Game 2" },
+			},
+		},
+		{
+			name = "DOS Box",
+			prefix = "DOS",
+			items = {
+				{ name = "Game 1" },
+				{ name = "Game 2" },
+			},
+		},
+		--{
+		--	name = "DOOM",
+		--	prefix = "DOOM game engine",
+		--	--items = {
+		--	--	{ name = "Game 1" },
+		--	--	{ name = "Game 2" },
+		--	--},
+		--},
+		--{
+		--	name = "Quake",
+		--	prefix = "Quake 1 game engine",
+		--	--items = {
+		--	--	{ name = "Game 1" },
+		--	--	{ name = "Game 2" },
+		--	--},
+		--},
+		{
+			name = "Cave Story",
+			prefix = "Cave Story game engine",
+			items = {
+				{ name = "Doukoutsu" },
+			},
+		},
+		--{
+		--	name = "2048",
+		--	prefix = "2048 game clone",
+		--	--items = {
+		--	--	{ name = "Game 1" },
+		--	--	{ name = "Game 2" },
+		--	--},
+		--},
+		{
+			name = "Dinothawr",
+			prefix = "Game",
+			items = {
+				{ name = "Game 1" },
+				{ name = "Game 2" },
+			},
+		},
+		--{
+		--	name = "ScummVM",
+		--	prefix = "ScummVM",
+		--	--items = {
+		--	--	{ name = "Game 1" },
+		--	--	{ name = "Game 2" },
+		--	--},
+		--},
+		{
+			name = "FFmpeg",
+			prefix = "FFmpeg",
+			items = {
+				{ name = "Game 1" },
+				{ name = "Game 2" },
+			},
+		},
+
+
 	}
 
 	-- wallpaper = love.graphics.newImage("wallpaper.png")
@@ -256,7 +356,7 @@ function love.load()
 	snd_switch = love.audio.newSource("switch.wav", "static")
 	--img_background = love.graphics.newImage("bg.png")
 
-	arrow = love.graphics.newImage("arrow.png")
+	arrow = love.graphics.newImage(repertory .. theme .. "/" .. size .. "/" .. "arrow.png")
 
 	overlay = { a = 255 }
 	tween(1, overlay, { a = 0 }, 'outSine')
@@ -265,11 +365,15 @@ function love.load()
 		category.a = i == active_category and 255 or 128
 		category.z = i == active_category and C_ACTIVE_ZOOM or C_PASSIVE_ZOOM
 		category.active_item = 1
-		category.icon = love.graphics.newImage(category.prefix .. ".png")
+		category.icon = love.graphics.newImage(repertory .. theme .. "/" .. size .. "/" .. category.prefix .. ".png")
 		if not category.items then category.items = {} end
 
 		for j,item in ipairs(category.items) do
-			item.icon = love.graphics.newImage(category.prefix .. "-item.png")
+			if category.prefix == "settings" then
+				item.icon = love.graphics.newImage(repertory .. theme .. "/" .. size .. "/setting.png")
+			else
+				item.icon = love.graphics.newImage(repertory .. theme .. "/" .. size .. "/" .. category.prefix .. "-content.png")
+			end
 			if i == active_category and j == category.active_item then
 				item.a = 255
 			elseif i == active_category and j ~= category.active_item then
@@ -301,13 +405,13 @@ function love.load()
 			end
 
 			for k,subitem in ipairs(item.items) do
-				subitem.icon = love.graphics.newImage("subsetting.png")
+				subitem.icon = love.graphics.newImage(repertory .. theme .. "/" .. size .. "/" .. "subsetting.png")
 				if category.prefix ~= "settings" then
-					if k == 1 then subitem.icon = love.graphics.newImage("play-pause.png") end
-					if k == 2 then subitem.icon = love.graphics.newImage("savestate.png") end
-					if k == 3 then subitem.icon = love.graphics.newImage("loadstate.png") end
-					if k == 4 then subitem.icon = love.graphics.newImage("screenshot.png") end
-					if k == 5 then subitem.icon = love.graphics.newImage("reload.png") end
+					if k == 1 then subitem.icon = love.graphics.newImage(repertory .. theme .. "/" .. size .. "/" .. "run.png") end
+					if k == 2 then subitem.icon = love.graphics.newImage(repertory .. theme .. "/" .. size .. "/" .. "savestate.png") end
+					if k == 3 then subitem.icon = love.graphics.newImage(repertory .. theme .. "/" .. size .. "/" .. "loadstate.png") end
+					if k == 4 then subitem.icon = love.graphics.newImage(repertory .. theme .. "/" .. size .. "/" .. "screenshot.png") end
+					if k == 5 then subitem.icon = love.graphics.newImage(repertory .. theme .. "/" .. size .. "/" .. "reload.png") end
 				end
 				subitem.a = 0
 				subitem.r = 0
@@ -544,6 +648,14 @@ function love.draw()
 	--love.graphics.draw(img_background, obj_background.x)
 
 	-- Print category name
+	love.graphics.setColor(255,255,255)
+	--love.graphics.draw(background, 0, 0, 0, love.window.getWidth( ), love.window.getHeight( ))
+
+	background_sx = love.window.getWidth()/background:getWidth()
+	background_sy = love.window.getHeight()/background:getHeight()
+
+	love.graphics.draw(background, 0, 0, 0, background_sx, background_sy)
+
 	love.graphics.setColor(236, 240, 241)
 	if depth == 0 then
 		love.graphics.print(categories[active_category].name, 10, 10)
