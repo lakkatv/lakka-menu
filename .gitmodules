@@ -1,0 +1,3 @@
+[submodule "retroarch-assets"]
+	path = retroarch-assets
+	url = https://github.com/libretro/retroarch-assets.git
