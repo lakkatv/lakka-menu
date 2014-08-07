@@ -1,8 +1,7 @@
 function love.conf(t)
 	t.window.title = "Lakka"
-	t.window.width = 1920
-	t.window.height = 1080
-	t.window.fullscreen = true
+	t.window.width = 0
+	t.window.height = 0
+	t.window.fullscreen = false
 	t.modules.physics = false
-	t.modules.mouse = true
 end
