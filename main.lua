@@ -1,67 +1,14 @@
 tween = require 'tween'
 
 function responsive()
-	if WIDTH >= 2560 then
-		ICON_SIZE = 256
-		HSPACING = 400
-		VSPACING = 128
-		C_ACTIVE_ZOOM = 1.0
-		C_PASSIVE_ZOOM = 0.5
-		I_ACTIVE_ZOOM = 1.0
-		I_PASSIVE_ZOOM = 0.5
-		ACTIVE_ITEM_FACTOR = 2.25
-		FONT_SIZE = 32
-		MARGIN_LEFT = 200.0
-		MARGIN_TOP = 400.0
-		TITLE_MARGIN_LEFT = 20.0
-		TITLE_MARGIN_TOP = 20.0
-		LABEL_MARGIN_LEFT = 128.0
-		return
-	end
 
-	if WIDTH >= 1920 then
-		ICON_SIZE = 192
-		HSPACING = 300
-		VSPACING = 96
-		C_ACTIVE_ZOOM = 1.0
-		C_PASSIVE_ZOOM = 0.5
-		I_ACTIVE_ZOOM = 1.0
-		I_PASSIVE_ZOOM = 0.5
-		ACTIVE_ITEM_FACTOR = 2.25
-		FONT_SIZE = 32
-		MARGIN_LEFT = 156.0
-		MARGIN_TOP = 300.0
-		TITLE_MARGIN_LEFT = 15.0
-		TITLE_MARGIN_TOP = 15.0
-		LABEL_MARGIN_LEFT = 96.0
-		return
-	end
-
-	if WIDTH <= 640 then
-		ICON_SIZE = 64
-		HSPACING = 100.0
-		VSPACING = 32.0
-		C_ACTIVE_ZOOM = 1.0
-		C_PASSIVE_ZOOM = 0.5
-		I_ACTIVE_ZOOM = 1.0
-		I_PASSIVE_ZOOM = 0.5
-		ACTIVE_ITEM_FACTOR = 2.25
-		FONT_SIZE = 16
-		MARGIN_LEFT = 60.0
-		MARGIN_TOP = 100.0
-		TITLE_MARGIN_LEFT = 10.0
-		TITLE_MARGIN_TOP = 10.0
-		LABEL_MARGIN_LEFT = 35.0
-		return
-	end
-
-	ICON_SIZE = 128
+	ICON_SIZE = 256
 	HSPACING = 200.0
 	VSPACING = 64.0
-	C_ACTIVE_ZOOM = 1.0
-	C_PASSIVE_ZOOM = 0.5
-	I_ACTIVE_ZOOM = 1.0
-	I_PASSIVE_ZOOM = 0.5
+	C_ACTIVE_ZOOM = 0.5
+	C_PASSIVE_ZOOM = 0.25
+	I_ACTIVE_ZOOM = 0.5
+	I_PASSIVE_ZOOM = 0.25
 	ACTIVE_ITEM_FACTOR = 2.25
 	FONT_SIZE = 24
 	MARGIN_LEFT = 120.0
@@ -80,12 +27,12 @@ function love.load()
 
 	theme = 'monochrome'
 	
-	repertory = 'retroarch-assets/lakka/'
+	repertory = 'retroarch-assets/xmb/'
 
 	responsive()
 
 	love.graphics.setNewFont(repertory .. theme .. "/" .. "font.ttf", FONT_SIZE)
-	background = love.graphics.newImage(repertory .. theme .. "/" .. ICON_SIZE .. "/" .. "bg.png")
+	background = love.graphics.newImage(repertory .. theme .. "/png/" .. "bg.png")
 	love.graphics.setColor(255,255,255)
 
 	categories = {
@@ -162,16 +109,16 @@ function love.load()
 		-- 	},
 		-- },
 		{
-			name = "Vectrex",
-			prefix = "Vectrex",
+			name = "GCE - Vectrex",
+			prefix = "GCE - Vectrex",
 			items = {
 				{ name = "Game 1" },
 				{ name = "Game 2" },
 			},
 		},
 		{
-			name = "SEGA MasterSystem",
-			prefix = "Master System",
+			name = "Sega - MasterSystem - Mark III",
+			prefix = "Sega - Master System - Mark III",
 			items = {
 				{ name = "Sonic Chaos" },
 				{ name = "Zool" },
@@ -180,230 +127,14 @@ function love.load()
 			},
 		},
 		{
-			name = "Nintendo Entertainment System",
-			prefix = "Nintendo Entertainment System",
+			name = "Nintendo - Nintendo Entertainment System",
+			prefix = "Nintendo - Nintendo Entertainment System",
 			items = {
 				{ name = "Mario Bros." },
 				{ name = "Final Fantasy 3" },
 				{ name = "Mario Bros." },
 			},
 		},
-		-- {
-		-- 	name = "DOSBox",
-		-- 	prefix = "DOS",
-		-- 	items = {
-		-- 		{ name = "JAZZ" },
-		-- 		{ name = "Jetpack" },
-		-- 	},
-		-- },
-		{
-			name = "PC Engine",
-			prefix = "PC Engine PCE-CD",
-			items = {
-				{ name = "Bonk 3" },
-				{ name = "Adventure Island" },
-				{ name = "Parodius" },
-			},
-		},
-		{
-			name = "SEGA Megadrive",
-			prefix = "Sega 8 16bit (Various)",
-			items = {
-				{ name = "Sonic 2" },
-				{ name = "Sonic 3" },
-				{ name = "Gunstar Heroes" },
-				{ name = "Piersolar" },
-			},
-		},
-		--{
-		--	name = "PC Engine SuperGrafx",
-		--	prefix = "PC Engine SuperGrafx",
-		--	items = {
-		--		{ name = "Game 1" },
-		--		{ name = "Game 2" },
-		--		{ name = "Game 3" },
-		--	},
-		--},
-		{
-			name = "Super Nintendo",
-			prefix = "Super Nintendo Entertainment System",
-			items = {
-				{ name = "Super Bomberman" },
-				{ name = "Secret of Mana" },
-				{ name = "Super Metroid" },
-				{ name = "The Legend of Zelda" },
-				{ name = "Tactics Ogre" },
-			},
-		},
-		-- {
-		-- 	name = "Playstation",
-		-- 	prefix = "PlayStation",
-		-- 	items = {
-		-- 		{ name = "Crash Bandicoot" },
-		-- 		{ name = "Final Fantasy VII" },
-		-- 		{ name = "Xenogears" },
-		-- 		{ name = "Suikoden 2" },
-		-- 		{ name = "Suikoden 2" },
-		-- 	},
-		-- },
-		{
-			name = "PC-FX",
-			prefix = "PC-FX",
-			items = {
-				{ name = "Cutie Honey FX" },
-				{ name = "Tenchi Muyo! Ryo-Ohki FX" },
-			},
-		},
-		-- {
-		-- 	name = "Virtual Boy",
-		-- 	prefix = "Virtual Boy",
-		-- 	items = {
-		-- 		{ name = "Game 1" },
-		-- 		{ name = "Game 2" },
-		-- 		{ name = "Game 3" },
-		-- 	},
-		-- },
-		-- {
-		-- 	name = "Nintendo 64",
-		-- 	prefix = "Nintendo 64",
-		-- 	items = {
-		-- 		{ name = "Game 1" },
-		-- 		{ name = "Game 2" },
-		-- 		{ name = "Game 3" },
-		-- 	},
-		-- },
-		-- {
-		-- 	name = "GameBoy",
-		-- 	prefix = "Game Boy",
-		-- 	items = {
-		-- 		{ name = "Tetris" },
-		-- 		{ name = "Pokemon Jaune" },
-		-- 		{ name = "Pokemon Rouge" },
-		-- 		{ name = "Pokemon Bleu" },
-		-- 		{ name = "Pokemon Vert" },
-		-- 		{ name = "Kirby" },
-		-- 		{ name = "Zelda" },
-		-- 	},
-		-- },
-		{
-			name = "Atari Lynx",
-			prefix = "Atari Lynx",
-			items = {
-				{ name = "Game 1" },
-				{ name = "Game 2" },
-			},
-		},
-		-- {
-		-- 	name = "GameBoy Color",
-		-- 	prefix = "Game Boy Color",
-		-- 	items = {
-		-- 		{ name = "Pokemon Or" },
-		-- 		{ name = "New Super Mario Bros" },
-		-- 	},
-		-- },
-		-- {
-		-- 	name = "NeoGeo Pocket",
-		-- 	prefix = "Neo Geo Pocket (Color)",
-		-- 	items = {
-		-- 		{ name = "Sonic Pocket Adventure" },
-		-- 		{ name = "Pocket Tennis" },
-		-- 	},
-		-- },
-		-- {
-		-- 	name = "WonderSwan Color",
-		-- 	prefix = "WonderSwan Color",
-		-- 	items = {
-		-- 		{ name = "Game 1" },
-		-- 		{ name = "Game 2" },
-		-- 	},
-		-- },
-		-- {
-		-- 	name = "GameBoy Advance",
-		-- 	prefix = "Game Boy Advance",
-		-- 	items = {
-		-- 		{ name = "Final Fantasy Tactics Advance" },
-		-- 	},
-		-- },
-		-- {
-		-- 	name = "NintendoDS",
-		-- 	prefix = "Nintendo DS",
-		-- 	items = {
-		-- 		{ name = "Nintendogs" },
-		-- 		{ name = "Yoshi's Touch And Go" },
-		-- 	},
-		-- },
-		-- {
-		-- 	name = "Arcade FBA",
-		-- 	prefix = "Arcade (various)",
-		-- 	items = {
-		-- 		{ name = "Game 1" },
-		-- 		{ name = "Game 2" },
-		-- 	},
-		-- },
-		-- {
-		-- 	name = "DOS Box",
-		-- 	prefix = "DOS",
-		-- 	items = {
-		-- 		{ name = "Game 1" },
-		-- 		{ name = "Game 2" },
-		-- 	},
-		-- },
-		--{
-		--	name = "DOOM",
-		--	prefix = "DOOM game engine",
-		--	--items = {
-		--	--	{ name = "Game 1" },
-		--	--	{ name = "Game 2" },
-		--	--},
-		--},
-		--{
-		--	name = "Quake",
-		--	prefix = "Quake 1 game engine",
-		--	--items = {
-		--	--	{ name = "Game 1" },
-		--	--	{ name = "Game 2" },
-		--	--},
-		--},
-		-- {
-		-- 	name = "Cave Story",
-		-- 	prefix = "Cave Story game engine",
-		-- 	items = {
-		-- 		{ name = "Doukoutsu" },
-		-- 	},
-		-- },
-		--{
-		--	name = "2048",
-		--	prefix = "2048 game clone",
-		--	--items = {
-		--	--	{ name = "Game 1" },
-		--	--	{ name = "Game 2" },
-		--	--},
-		--},
-		-- {
-		-- 	name = "Dinothawr",
-		-- 	prefix = "Game",
-		-- 	items = {
-		-- 		{ name = "Game 1" },
-		-- 		{ name = "Game 2" },
-		-- 	},
-		-- },
-		--{
-		--	name = "ScummVM",
-		--	prefix = "ScummVM",
-		--	--items = {
-		--	--	{ name = "Game 1" },
-		--	--	{ name = "Game 2" },
-		--	--},
-		--},
-		-- {
-		-- 	name = "FFmpeg",
-		-- 	prefix = "FFmpeg",
-		-- 	items = {
-		-- 		{ name = "Game 1" },
-		-- 		{ name = "Game 2" },
-		-- 	},
-		-- },
-
 
 	}
 
@@ -422,7 +153,7 @@ function love.load()
 	snd_switch = love.audio.newSource("switch.wav", "static")
 	--img_background = love.graphics.newImage("bg.png")
 
-	arrow = love.graphics.newImage(repertory .. theme .. "/" .. ICON_SIZE .. "/" .. "arrow.png")
+	arrow = love.graphics.newImage(repertory .. theme .. "/png/" .. "arrow.png")
 
 	overlay = { a = 255 }
 	tween(1, overlay, { a = 0 }, 'outSine')
@@ -431,14 +162,14 @@ function love.load()
 		category.a = i == active_category and 255 or 128
 		category.z = i == active_category and C_ACTIVE_ZOOM or C_PASSIVE_ZOOM
 		category.active_item = 1
-		category.icon = love.graphics.newImage(repertory .. theme .. "/" .. ICON_SIZE .. "/" .. category.prefix .. ".png")
+		category.icon = love.graphics.newImage(repertory .. theme .. "/png/" .. category.prefix .. ".png")
 		if not category.items then category.items = {} end
 
 		for j,item in ipairs(category.items) do
 			if category.prefix == "settings" then
-				item.icon = love.graphics.newImage(repertory .. theme .. "/" .. ICON_SIZE .. "/setting.png")
+				item.icon = love.graphics.newImage(repertory .. theme .. "/png/setting.png")
 			else
-				item.icon = love.graphics.newImage(repertory .. theme .. "/" .. ICON_SIZE .. "/" .. category.prefix .. "-content.png")
+				item.icon = love.graphics.newImage(repertory .. theme .. "/png/" .. category.prefix .. "-content.png")
 			end
 			if i == active_category and j == category.active_item then
 				item.a = 255
@@ -471,13 +202,13 @@ function love.load()
 			end
 
 			for k,subitem in ipairs(item.items) do
-				subitem.icon = love.graphics.newImage(repertory .. theme .. "/" .. ICON_SIZE .. "/" .. "subsetting.png")
+				subitem.icon = love.graphics.newImage(repertory .. theme .. "/png/" .. "subsetting.png")
 				if category.prefix ~= "settings" then
-					if k == 1 then subitem.icon = love.graphics.newImage(repertory .. theme .. "/" .. ICON_SIZE .. "/" .. "run.png") end
-					if k == 2 then subitem.icon = love.graphics.newImage(repertory .. theme .. "/" .. ICON_SIZE .. "/" .. "savestate.png") end
-					if k == 3 then subitem.icon = love.graphics.newImage(repertory .. theme .. "/" .. ICON_SIZE .. "/" .. "loadstate.png") end
-					if k == 4 then subitem.icon = love.graphics.newImage(repertory .. theme .. "/" .. ICON_SIZE .. "/" .. "screenshot.png") end
-					if k == 5 then subitem.icon = love.graphics.newImage(repertory .. theme .. "/" .. ICON_SIZE .. "/" .. "reload.png") end
+					if k == 1 then subitem.icon = love.graphics.newImage(repertory .. theme .. "/png/" .. "run.png") end
+					if k == 2 then subitem.icon = love.graphics.newImage(repertory .. theme .. "/png/" .. "savestate.png") end
+					if k == 3 then subitem.icon = love.graphics.newImage(repertory .. theme .. "/png/" .. "loadstate.png") end
+					if k == 4 then subitem.icon = love.graphics.newImage(repertory .. theme .. "/png/" .. "screenshot.png") end
+					if k == 5 then subitem.icon = love.graphics.newImage(repertory .. theme .. "/png/" .. "reload.png") end
 				end
 				subitem.a = 0
 				subitem.r = 0
@@ -693,12 +424,12 @@ function love.update(dt)
 		ai.slot = ai.slot - 1
 	end
 
-	if love.keyboard.isDown(" ") and depth == 0 then
+	if love.keyboard.isDown("x") and depth == 0 then
 		open_submenu()
 		depth = 1
 	end
 
-	if love.keyboard.isDown("backspace") and depth == 1 then
+	if love.keyboard.isDown("w") and depth == 1 then
 		close_submenu()
 		depth = 0
 	end
