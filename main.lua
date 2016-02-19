@@ -25,7 +25,7 @@ function love.load()
 	love.mouse.setVisible(false)
 
 	theme = 'monochrome'
-	
+
 	repertory = 'retroarch-assets/xmb/'
 
 	responsive()
