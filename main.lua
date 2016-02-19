@@ -20,8 +20,7 @@ end
 
 function love.load()
 
-	WIDTH = love.graphics.getWidth()
-	HEIGHT = love.graphics.getHeight()
+	local WIDTH, HEIGHT = love.window.getMode()
 	love.window.setMode(WIDTH, HEIGHT, {fullscreen= true, vsync=true})
 	love.mouse.setVisible(false)
 
@@ -448,8 +447,9 @@ function love.draw()
 	love.graphics.setColor(255,255,255)
 	--love.graphics.draw(background, 0, 0, 0, love.window.getWidth( ), love.window.getHeight( ))
 
-	background_sx = love.window.getWidth()/background:getWidth()
-	background_sy = love.window.getHeight()/background:getHeight()
+	local WIDTH, HEIGHT = love.window.getMode()
+	background_sx = WIDTH/background:getWidth()
+	background_sy = HEIGHT/background:getHeight()
 
 	love.graphics.draw(background, 0, 0, 0, background_sx, background_sy)
 
