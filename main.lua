@@ -21,7 +21,7 @@ end
 function love.load()
 
 	local WIDTH, HEIGHT = love.window.getMode()
-	love.window.setMode(WIDTH, HEIGHT, {fullscreen= true, vsync=true})
+	love.window.setMode(WIDTH, HEIGHT, { fullscreen = true, vsync = true })
 	love.mouse.setVisible(false)
 
 	theme = 'monochrome'
@@ -377,61 +377,53 @@ function love.update(dt)
 	ac = categories[active_category]
 	ai = ac.items[ac.active_item]
 
-	-- handle category switch
-	if depth == 0 and love.keyboard.isDown("right") and love.timer.getTime() > t1 + 0.3 and active_category < table.getn(categories) then
-		t1 = love.timer.getTime()
-		active_category = active_category + 1
-		switch_categories()
-	end
-	if depth == 0 and love.keyboard.isDown("left") and love.timer.getTime() > t1 + 0.3 and active_category > 1 then
-		t1 = love.timer.getTime()
-		active_category = active_category - 1
-		switch_categories()
-	end
+    local delay = 0.3
 
-	-- handle item switch
-	if depth == 0 and love.keyboard.isDown("down") and love.timer.getTime() > t1 + 0.3 and ac.active_item < table.getn(ac.items) then
-		t1 = love.timer.getTime()
-		ac.active_item = ac.active_item + 1
-		switch_items()
-	end
-	if depth == 0 and love.keyboard.isDown("up") and love.timer.getTime() > t1 + 0.3 and ac.active_item > 1 then
-		t1 = love.timer.getTime()
-		ac.active_item = ac.active_item - 1
-		switch_items()
-	end
-
-	-- handle subitem switch
-	if depth == 1 and love.keyboard.isDown("down") and love.timer.getTime() > t1 + 0.3 and ai.active_subitem < table.getn(ai.items) then
-		t1 = love.timer.getTime()
-		ai.active_subitem = ai.active_subitem + 1
-		switch_subitems()
-	end
-	if depth == 1 and love.keyboard.isDown("up") and love.timer.getTime() > t1 + 0.3 and ai.active_subitem > 1 then
-		t1 = love.timer.getTime()
-		ai.active_subitem = ai.active_subitem - 1
-		switch_subitems()
-	end
-
-	-- handle slot switch
-	if depth == 1 and love.keyboard.isDown("right") and love.timer.getTime() > t1 + 0.3 and ac.prefix ~= "settings" and (ai.active_subitem == 2 or ai.active_subitem == 3) then
-		t1 = love.timer.getTime()
-		ai.slot = ai.slot + 1
-	end
-	if depth == 1 and love.keyboard.isDown("left") and love.timer.getTime() > t1 + 0.3 and ac.prefix ~= "settings" and (ai.active_subitem == 2 or ai.active_subitem == 3) and ai.slot > -1 then
-		t1 = love.timer.getTime()
-		ai.slot = ai.slot - 1
-	end
-
-	if love.keyboard.isDown("x") and depth == 0 then
-		open_submenu()
-		depth = 1
-	end
-
-	if love.keyboard.isDown("w") and depth == 1 then
-		close_submenu()
-		depth = 0
-	end
+    if depth == 0 then
+        if love.timer.getTime() > t1 + delay then
+            if love.keyboard.isDown("x") then
+                open_submenu()
+                depth = 1
+            elseif love.keyboard.isDown("right") and active_category < table.getn(categories) then
+                t1 = love.timer.getTime()
+                active_category = active_category + 1
+                switch_categories()
+            elseif love.keyboard.isDown("left") and active_category > 1 then
+                t1 = love.timer.getTime()
+                active_category = active_category - 1
+                switch_categories()
+            elseif love.keyboard.isDown("down") and ac.active_item < table.getn(ac.items) then
+                t1 = love.timer.getTime()
+                ac.active_item = ac.active_item + 1
+                switch_items()
+            elseif love.keyboard.isDown("up") and ac.active_item > 1 then
+                t1 = love.timer.getTime()
+                ac.active_item = ac.active_item - 1
+                switch_items()
+            end
+        end
+    elseif depth == 1 then
+        if love.timer.getTime() > t1 + delay then
+            if love.keyboard.isDown("w") then
+                close_submenu()
+                depth = 0
+            elseif love.keyboard.isDown("down") and ai.active_subitem < table.getn(ai.items) then
+                t1 = love.timer.getTime()
+                ai.active_subitem = ai.active_subitem + 1
+                switch_subitems()
+            elseif love.keyboard.isDown("up") and ai.active_subitem > 1 then
+                t1 = love.timer.getTime()
+                ai.active_subitem = ai.active_subitem - 1
+                switch_subitems()
+            elseif love.keyboard.isDown("right") and ac.prefix ~= "settings" and (ai.active_subitem == 2 or ai.active_subitem == 3) then
+                t1 = love.timer.getTime()
+                ai.slot = ai.slot + 1
+            elseif love.keyboard.isDown("left") and ac.prefix ~= "settings" and (ai.active_subitem == 2 or ai.active_subitem == 3) and ai.slot > -1 then
+                t1 = love.timer.getTime()
+                ai.slot = ai.slot - 1
+            end
+        end
+    end
 
 	tween.update(dt)
 end
